@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nivio Board Room — Your AI Board of Advisors, On Demand</title>
+<meta name="description" content="Assemble a board of 4–8 AI advisers — from Rockefeller and Ford to modern operating archetypes — and run a live decision meeting that ends with a recommendation, recap decks, and action items. The board you’ve always wanted, on demand.">
+<link rel="canonical" href="https://niviolab.com/board-room">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nivio">
+<meta property="og:title" content="Nivio Board Room — Your AI Board of Advisors, On Demand">
+<meta property="og:description" content="Assemble a board of 4–8 AI advisers — from Rockefeller and Ford to modern operating archetypes — and run a live decision meeting that ends with a recommendation, recap decks, and action items. The board you’ve always wanted, on demand.">
+<meta property="og:url" content="https://niviolab.com/board-room">
+<meta property="og:image" content="https://niviolab.com/og/board-room.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nivio Board Room — Your AI Board of Advisors, On Demand">
+<meta name="twitter:description" content="Assemble a board of 4–8 AI advisers — from Rockefeller and Ford to modern operating archetypes — and run a live decision meeting that ends with a recommendation, recap decks, and action items. The board you’ve always wanted, on demand.">
+<meta name="twitter:image" content="https://niviolab.com/og/board-room.png">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Nivio Board Room","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Assemble a board of 4–8 AI advisers — from Rockefeller and Ford to modern operating archetypes — and run a live decision meeting that ends with a recommendation, recap decks, and action items. The board you’ve always wanted, on demand.","url":"https://niviolab.com/board-room","publisher":{"@type":"Organization","name":"Nivio","url":"https://niviolab.com/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Nivio","item":"https://niviolab.com/"},{"@type":"ListItem","position":2,"name":"Nivio Board Room","item":"https://niviolab.com/board-room"}]}]</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF;--bg2:#F7F8FB;--bg3:#EEF1F7;
+  --ink:#0A0F1F;--ink2:#1F2A44;--ink3:#4A5675;--ink4:#8994B0;--ink5:#C7CEDD;
+  --cobalt:#2563EB;--cobalt2:#1D4ED8;--cobalt3:#3B82F6;--cobalt4:#60A5FA;--cobalt-soft:#EFF3FF;
+  --mint:#10B981;--amber:#F59E0B;--rose:#F43F5E;--violet:#8B5CF6;
+  --rule:#E5E9F2;--rule2:#D0D6E4;
+  --shadow-sm:0 1px 2px rgba(10,15,31,.04),0 2px 6px rgba(10,15,31,.05);
+  --shadow-md:0 2px 4px rgba(10,15,31,.05),0 10px 28px rgba(10,15,31,.08);
+  --shadow-lg:0 8px 24px rgba(10,15,31,.08),0 24px 60px rgba(37,99,235,.12);
+  --shadow-glow:0 0 0 1px rgba(37,99,235,.2),0 20px 40px -10px rgba(37,99,235,.3);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','ss02','cv11'}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:'zero','ss01'}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mk{width:34px;height:34px;display:block;flex-shrink:0;border-radius:6px;background:transparent;padding:0}
+.brand-n{font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--ink)}
+.brand-s{font-size:11px;color:var(--ink4);margin-left:8px;padding-left:10px;border-left:1px solid var(--rule2);font-weight:500;letter-spacing:.02em}
+.nav-c{flex:1;display:flex;justify-content:center;gap:2px}
+.nav-a{padding:8px 12px;font-size:13.5px;font-weight:500;color:var(--ink3);border-radius:8px;transition:all .18s;letter-spacing:-.005em;white-space:nowrap}
+.nav-a:hover{color:var(--ink);background:var(--bg2)}
+.nav-a.active{color:var(--cobalt);background:var(--cobalt-soft)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.pill-live{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(16,185,129,.08);color:var(--mint);border:1px solid rgba(16,185,129,.2);border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:-.005em}
+.pill-live::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;font-size:13.5px;font-weight:600;letter-spacing:-.005em;transition:all .18s;cursor:pointer;border:1px solid transparent;font-family:inherit}
+.btn.p{background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 4px 14px -2px rgba(37,99,235,.35)}
+.btn.p:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 22px -4px rgba(37,99,235,.45)}
+.btn.s{background:var(--bg);color:var(--ink);border-color:var(--rule2);box-shadow:var(--shadow-sm)}
+.btn.s:hover{border-color:var(--cobalt);color:var(--cobalt)}
+.btn.lg{padding:13px 22px;font-size:14.5px;border-radius:12px}
+.btn.ghost{background:transparent;color:var(--ink2);padding:9px 14px}
+.btn.ghost:hover{color:var(--cobalt);background:var(--cobalt-soft)}
+.btn .arr{transition:transform .18s}
+.btn:hover .arr{transform:translateX(2px)}
+
+.container{max-width:1280px;margin:0 auto;padding:0 28px}
+
+/* TICKER — subtle */
+.tape{background:var(--bg2);border-bottom:1px solid var(--rule);padding:8px 0;overflow:hidden;position:relative}
+.tape-run{display:flex;gap:28px;align-items:center;animation:slide 70s linear infinite;white-space:nowrap;padding-left:100%;font-size:11.5px;font-weight:500;color:var(--ink3);font-family:'Geist Mono',monospace}
+@keyframes slide{to{transform:translateX(-100%)}}
+.ti{display:inline-flex;gap:6px;align-items:center}
+.ti .s{color:var(--ink4);font-weight:600}
+.ti .v{color:var(--ink2);font-weight:600}
+.ti .u{color:var(--mint);font-weight:600}
+.ti .d{color:var(--rose);font-weight:600}
+.ti-sep{color:var(--ink5);opacity:.7}
+
+/* HERO */
+.hero{padding:72px 0 80px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(37,99,235,.18),rgba(139,92,246,.1) 40%,transparent 65%);top:-400px;right:-300px;filter:blur(40px);pointer-events:none;z-index:0}
+.hero-orb.o2{top:300px;left:-400px;right:auto;width:600px;height:600px;background:radial-gradient(circle at 40% 40%,rgba(16,185,129,.1),transparent 65%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(10,15,31,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(10,15,31,.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 30%,black 10%,transparent 70%);pointer-events:none;z-index:0}
+.hero-inner{display:grid;grid-template-columns:1.05fr 1.1fr;gap:56px;align-items:center;position:relative;z-index:1}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 6px 5px 12px;background:var(--bg);border:1px solid var(--rule2);border-radius:999px;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:28px;box-shadow:var(--shadow-sm)}
+.hero-badge .bdg-tag{padding:3px 10px;background:linear-gradient(135deg,var(--cobalt),var(--violet));color:#fff;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:.02em}
+.hero-badge .arr{font-size:13px;margin-left:2px;color:var(--ink3)}
+
+.hero-h{font-size:clamp(3rem,5.6vw,4.6rem);font-weight:700;letter-spacing:-.042em;line-height:1;margin-bottom:22px;color:var(--ink);text-wrap:balance;font-feature-settings:'ss01','cv11'}
+.hero-h .grad{background:linear-gradient(135deg,var(--cobalt3) 0%,var(--violet) 60%,var(--cobalt) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+.hero-sub{font-size:18px;color:var(--ink3);max-width:540px;line-height:1.5;margin-bottom:32px;font-weight:400;letter-spacing:-.005em}
+.hero-sub b{color:var(--ink);font-weight:600}
+
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;align-items:center}
+
+.hero-signals{display:flex;flex-wrap:wrap;gap:22px;padding-top:24px;border-top:1px solid var(--rule)}
+.sig{display:flex;align-items:baseline;gap:8px}
+.sig .v{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.02em;font-family:'Geist',sans-serif}
+.sig .l{font-size:12px;color:var(--ink3);font-weight:500}
+.sig .d{width:4px;height:4px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2);margin-right:2px;align-self:center}
+
+/* HERO PRODUCT CARD — floating */
+.product{position:relative}
+.product-stack{position:relative}
+.product-card{background:#fff;border:1px solid var(--rule);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;position:relative;z-index:2}
+.pc-bar{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--rule);background:linear-gradient(180deg,#fff,var(--bg2));gap:10px}
+.pc-lights{display:flex;gap:5px}
+.pc-lights span{width:10px;height:10px;border-radius:50%}
+.pc-lights span:nth-child(1){background:#FF5F57}
+.pc-lights span:nth-child(2){background:#FEBC2E}
+.pc-lights span:nth-child(3){background:#28C840}
+.pc-url{flex:1;text-align:center;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink3);background:#fff;border:1px solid var(--rule);border-radius:6px;padding:4px 14px}
+.pc-url b{color:var(--cobalt)}
+.pc-live{font-size:10.5px;font-weight:600;color:var(--mint);display:inline-flex;align-items:center;gap:5px;letter-spacing:-.005em}
+.pc-live::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%}
+
+.pc-body{padding:22px;display:grid;grid-template-columns:1fr;gap:16px}
+.pc-topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pc-tabs{display:flex;gap:2px;background:var(--bg2);padding:3px;border-radius:9px}
+.pc-tab{padding:5px 11px;font-size:11.5px;font-weight:500;color:var(--ink3);border-radius:6px;cursor:pointer;letter-spacing:-.005em}
+.pc-tab.active{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);font-weight:600}
+.pc-meta{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--ink4);display:flex;gap:10px}
+.pc-meta b{color:var(--cobalt)}
+
+.pc-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:12px}
+.pc-hero-l{background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(139,92,246,.04));border:1px solid rgba(37,99,235,.12);border-radius:12px;padding:18px}
+.pc-plan-lbl{font-size:10.5px;font-weight:600;color:var(--cobalt);letter-spacing:.02em;margin-bottom:6px;display:flex;justify-content:space-between}
+.pc-plan-lbl span:last-child{color:var(--mint)}
+.pc-plan-val{font-size:2rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:4px}
+.pc-plan-val .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.pc-plan-sub{font-size:11px;color:var(--ink3)}
+.pc-plan-spark{margin-top:10px;height:36px}
+
+.pc-hero-r{display:grid;grid-template-rows:1fr 1fr;gap:8px}
+.pc-pill{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 12px}
+.pc-pill .l{font-size:10px;font-weight:600;color:var(--ink4);letter-spacing:.04em;text-transform:uppercase}
+.pc-pill .v{font-size:15px;font-weight:700;color:var(--ink);margin-top:2px;letter-spacing:-.015em}
+.pc-pill .v .up{color:var(--mint);font-size:12px;font-weight:600}
+
+.pc-list{background:var(--bg2);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.pc-list-hdr{display:grid;grid-template-columns:42px 104px 1fr 56px 26px;gap:10px;padding:9px 14px;background:#fff;border-bottom:1px solid var(--rule);font-family:'Geist Mono',monospace;font-size:10px;color:var(--ink4);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pc-list-hdr .r{text-align:right}
+.pc-row{display:grid;grid-template-columns:42px 104px 1fr 56px 26px;gap:10px;padding:9px 14px;border-bottom:1px solid var(--rule);align-items:center;font-size:12.5px;font-family:'Geist Mono',monospace;font-variant-numeric:tabular-nums;transition:background .15s}
+.pc-row:hover{background:#fff}
+.pc-row:last-child{border:none}
+.pc-row.take{background:rgba(37,99,235,.04)}
+.pc-row.take:hover{background:rgba(37,99,235,.07)}
+.pc-row .id{color:var(--ink3);font-weight:600}
+.pc-row.take .id{color:var(--cobalt);font-weight:700}
+.pc-row .cp{color:var(--ink);font-weight:500;font-family:'Geist',sans-serif}
+.pc-row .gr{color:var(--ink3)}
+.pc-row .px{color:var(--ink);text-align:right;font-weight:500}
+.pc-row .tk{text-align:right}
+.pc-row .tk .ok{display:inline-block;width:22px;height:22px;background:linear-gradient(135deg,var(--cobalt3),var(--cobalt));color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:11px;font-weight:700;font-family:'Geist',sans-serif;box-shadow:0 2px 6px rgba(37,99,235,.3)}
+.pc-row .tk .no{display:inline-block;width:18px;height:2px;background:var(--ink5);border-radius:1px;vertical-align:middle}
+
+.pc-cta{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(139,92,246,.06));border:1px solid rgba(37,99,235,.15);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pc-cta .txt{font-size:12.5px;color:var(--ink2);font-weight:500}
+.pc-cta .txt b{color:var(--cobalt);font-weight:700}
+.pc-cta .btn{padding:6px 12px;font-size:12px;border-radius:7px}
+
+/* Floating mini-cards */
+.float-card{position:absolute;background:#fff;border:1px solid var(--rule);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-md);z-index:3;font-size:12px}
+.float-card.fc1{top:-24px;left:-32px;display:flex;align-items:center;gap:10px}
+.float-card.fc1 .icn{width:36px;height:36px;background:linear-gradient(135deg,var(--mint),#059669);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+.float-card.fc1 .t{font-weight:600;font-size:13px;color:var(--ink)}
+.float-card.fc1 .s{color:var(--ink3);font-size:11.5px}
+.float-card.fc1 .s b{color:var(--mint)}
+
+.float-card.fc2{bottom:-20px;right:-28px;min-width:200px}
+.float-card.fc2 .t{font-size:10.5px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.float-card.fc2 .v{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--ink);font-family:'Geist',sans-serif}
+.float-card.fc2 .v .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.float-card.fc2 .u{font-size:12px;color:var(--mint);font-weight:600;margin-top:6px;display:flex;align-items:center;gap:4px}
+
+/* LOGOS BAR */
+.logos{padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--bg2)}
+.logos-lbl{text-align:center;font-size:12px;font-weight:500;color:var(--ink3);margin-bottom:22px;letter-spacing:.02em}
+.logos-row{display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;opacity:.75}
+.logo-mark{font-family:'Geist',sans-serif;font-weight:700;font-size:17px;color:var(--ink3);letter-spacing:-.015em}
+.logo-mark.serif{font-family:Georgia,serif;font-style:italic;font-weight:500}
+.logo-mark.mono{font-family:'Geist Mono',monospace;font-weight:500;font-size:15px}
+
+/* SECTIONS */
+.sec{padding:110px 0;position:relative}
+.sec.alt{background:var(--bg2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.sec-head{text-align:center;margin-bottom:60px;max-width:780px;margin-left:auto;margin-right:auto}
+.sec-kick{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:-.005em;margin-bottom:18px}
+.sec-kick::before{content:'';width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.sec-h{font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:700;letter-spacing:-.035em;line-height:1.04;text-wrap:balance;color:var(--ink);margin-bottom:14px}
+.sec-h .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-dek{font-size:17px;color:var(--ink3);line-height:1.5;max-width:620px;margin:0 auto;letter-spacing:-.005em}
+
+/* FEATURE GRID — bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(180px,auto);gap:16px}
+.bx{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:all .25s}
+.bx:hover{border-color:var(--cobalt3);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.bx-k{font-size:11px;font-weight:600;color:var(--cobalt);letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;display:inline-flex;align-items:center;gap:6px}
+.bx-k .dot{width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.bx-h{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--ink);margin-bottom:8px;text-wrap:balance}
+.bx p{font-size:14px;color:var(--ink3);line-height:1.55}
+.bx-meta{margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule2);font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink4);display:flex;justify-content:space-between}
+.bx-meta b{color:var(--cobalt)}
+
+.bx.w2{grid-column:span 3}
+.bx.w3{grid-column:span 4}
+.bx.w4{grid-column:span 2}
+.bx.w-half{grid-column:span 2}
+.bx.tall{grid-row:span 2}
+
+/* Feature visuals inside bento */
+.bx-visual{margin-top:16px;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--rule);border-radius:10px;padding:14px;position:relative;overflow:hidden}
+
+/* Plan visual */
+.vis-plan{display:flex;flex-direction:column;gap:6px}
+.vis-bar{display:grid;grid-template-columns:60px 1fr 50px;gap:10px;align-items:center;font-size:11px;font-family:'Geist Mono',monospace;color:var(--ink3)}
+.vis-bar .bar{height:6px;background:var(--bg3);border-radius:3px;position:relative;overflow:hidden}
+.vis-bar .bar::before{content:'';position:absolute;left:0;top:0;bottom:0;width:var(--w,60%);background:linear-gradient(90deg,var(--cobalt3),var(--violet));border-radius:3px}
+.vis-bar .v{color:var(--cobalt);font-weight:600;text-align:right}
+
+/* Book visual */
+.vis-book{display:flex;gap:4px;align-items:flex-end;height:74px}
+.vis-book span{flex:1;background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));border-radius:3px 3px 0 0;opacity:.85}
+.vis-book span:nth-child(1){height:44%}
+.vis-book span:nth-child(2){height:62%}
+.vis-book span:nth-child(3){height:38%}
+.vis-book span:nth-child(4){height:78%}
+.vis-book span:nth-child(5){height:55%}
+.vis-book span:nth-child(6){height:88%;background:linear-gradient(180deg,var(--violet),var(--cobalt))}
+.vis-book span:nth-child(7){height:70%}
+.vis-book span:nth-child(8){height:48%}
+.vis-book span:nth-child(9){height:92%;background:linear-gradient(180deg,var(--violet),var(--cobalt))}
+.vis-book span:nth-child(10){height:66%}
+.vis-book span:nth-child(11){height:82%}
+.vis-book span:nth-child(12){height:56%}
+
+/* intel curve */
+.vis-intel{height:90px;position:relative}
+.vis-intel svg{width:100%;height:100%}
+
+/* HOW IT WORKS — steps */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;background:#fff;border:1px solid var(--rule);border-radius:20px;padding:36px 24px;box-shadow:var(--shadow-md)}
+.steps::before{content:'';position:absolute;left:10%;right:10%;top:74px;height:2px;background:repeating-linear-gradient(90deg,var(--cobalt) 0 6px,transparent 6px 12px);opacity:.6}
+.step{text-align:center;position:relative;z-index:1;padding:0 12px}
+.step .idx{width:44px;height:44px;margin:0 auto 14px;background:#fff;border:2px solid var(--cobalt);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cobalt);font-weight:700;font-size:17px;letter-spacing:-.02em;position:relative;box-shadow:0 4px 12px -2px rgba(37,99,235,.25)}
+.step .idx::after{content:'';position:absolute;inset:-5px;border-radius:15px;background:linear-gradient(135deg,var(--cobalt-soft),transparent);z-index:-1}
+.step .stg{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.015em}
+.step .when{font-family:'Geist Mono',monospace;font-size:11px;color:var(--cobalt);font-weight:600;margin-bottom:10px}
+.step .txt{font-size:13px;color:var(--ink3);line-height:1.5}
+.step .txt b{color:var(--ink);font-weight:600}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:all .2s}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cobalt3),var(--violet));opacity:0;transition:opacity .2s}
+.kpi:hover{border-color:var(--cobalt3);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi:hover::before{opacity:1}
+.kpi .k{font-size:11px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;display:flex;justify-content:space-between}
+.kpi .k .tag{color:var(--cobalt);background:var(--cobalt-soft);padding:2px 8px;border-radius:999px;letter-spacing:0;text-transform:none;font-size:10.5px}
+.kpi .v{font-size:3rem;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1;font-feature-settings:'ss01','cv11'}
+.kpi .v .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kpi .v .mint{color:var(--mint)}
+.kpi .v .u{font-size:1.1rem;color:var(--ink3);font-weight:600}
+.kpi .note{font-size:13px;color:var(--ink3);margin-top:14px;line-height:1.5}
+.kpi .bar{margin-top:14px;height:4px;background:var(--bg2);border-radius:2px;overflow:hidden}
+.kpi .bar::before{content:'';display:block;height:100%;width:var(--w,80%);background:linear-gradient(90deg,var(--cobalt3),var(--violet));border-radius:2px}
+
+/* TESTIMONIAL / QUOTE */
+.q-wrap{padding:110px 0;background:linear-gradient(180deg,var(--bg),var(--bg2));border-top:1px solid var(--rule);position:relative;overflow:hidden}
+.q-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(37,99,235,.1),transparent 60%);filter:blur(20px);pointer-events:none}
+.q-card{max-width:1000px;margin:0 auto;background:#fff;border:1px solid var(--rule);border-radius:24px;padding:56px 64px;box-shadow:var(--shadow-lg);position:relative}
+.q-mark{position:absolute;top:20px;left:28px;width:48px;height:48px;background:linear-gradient(135deg,var(--cobalt-soft),rgba(139,92,246,.1));border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cobalt);font-size:30px;font-weight:900;font-family:Georgia,serif;line-height:1}
+.q-text{font-size:clamp(1.4rem,2.3vw,1.75rem);font-weight:500;letter-spacing:-.022em;line-height:1.3;color:var(--ink);margin-bottom:32px;padding-left:70px}
+.q-text .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.q-by{padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.q-person{display:flex;align-items:center;gap:14px}
+.q-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cobalt3),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;letter-spacing:-.02em}
+.q-who{font-size:14.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.q-who .s{display:block;font-size:13px;color:var(--ink3);font-weight:500;margin-top:2px}
+.q-badge{padding:6px 14px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:999px;font-size:12px;font-weight:600}
+
+/* CTA */
+.cta-wrap{padding:140px 0;position:relative;overflow:hidden}
+.cta-wrap::before{content:'';position:absolute;top:10%;left:10%;right:10%;bottom:10%;background:radial-gradient(ellipse at center,rgba(37,99,235,.12),transparent 60%);filter:blur(20px);pointer-events:none}
+.cta-card{max-width:1100px;margin:0 auto;background:linear-gradient(135deg,#0A0F1F 0%,#1E293B 100%);color:#fff;border-radius:28px;padding:60px 64px;position:relative;overflow:hidden;box-shadow:0 40px 80px -20px rgba(10,15,31,.4)}
+.cta-card::before{content:'';position:absolute;top:-40%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(37,99,235,.45),transparent 60%);filter:blur(10px);pointer-events:none}
+.cta-card::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 50%,black,transparent 80%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.cta-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(37,99,235,.15);color:var(--cobalt4);border:1px solid rgba(96,165,250,.3);border-radius:999px;font-size:12px;font-weight:600;margin-bottom:22px;backdrop-filter:blur(8px)}
+.cta-h{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:18px}
+.cta-h .grad{background:linear-gradient(135deg,var(--cobalt4),var(--violet),#EC4899);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-card p{font-size:17px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:30px;max-width:520px}
+.cta-card p b{color:#fff;font-weight:600}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.cta-card .btn.p{background:linear-gradient(180deg,var(--cobalt4),var(--cobalt3));box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 8px 24px -4px rgba(37,99,235,.5)}
+.cta-card .btn.s{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.18);backdrop-filter:blur(8px)}
+.cta-card .btn.s:hover{background:rgba(255,255,255,.12)}
+
+.cta-side{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px}
+.cta-side-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.cta-side-hdr b{color:var(--cobalt4);letter-spacing:0;text-transform:none;font-size:12px}
+.cta-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.cta-step:last-child{border:none}
+.cta-step .n{width:26px;height:26px;border:1px solid rgba(96,165,250,.4);color:var(--cobalt4);border-radius:7px;font-family:'Geist Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,.1)}
+.cta-step .t{color:#fff;font-size:13.5px;font-weight:600;letter-spacing:-.005em}
+.cta-step .d{font-size:12px;color:rgba(255,255,255,.6);font-weight:400;margin-top:2px;letter-spacing:0}
+
+/* FOOTER */
+.foot{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--rule)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--rule)}
+.foot h5{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:14px;letter-spacing:-.005em}
+.foot ul{list-style:none}
+.foot li{font-size:13.5px;color:var(--ink3);margin-bottom:9px;font-weight:500;letter-spacing:-.005em}
+.foot li a:hover{color:var(--cobalt)}
+.foot-blurb{font-size:14px;color:var(--ink3);max-width:380px;line-height:1.55;margin-top:14px;font-weight:500;letter-spacing:-.005em}
+.foot-bottom{padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink4)}
+
+@media(max-width:1080px){
+  .hero-inner,.bento,.steps,.kpi-grid,.cta-inner,.foot-grid{grid-template-columns:1fr}
+  .bx.w2,.bx.w3,.bx.w4,.bx.w-half{grid-column:span 1}
+  .bx.tall{grid-row:auto}
+  .steps::before{display:none}
+  .nav-c{display:none}
+  .q-text{padding-left:0;padding-top:40px}
+  .q-mark{left:50%;transform:translateX(-50%)}
+  .float-card{display:none}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Nivio Board Room?","acceptedAnswer":{"@type":"Answer","text":"Nivio Board Room is an AI board-of-directors simulator. You assemble a personal board of 4 to 8 advisers from a curated roster of historically consequential builders and operators, run a live decision meeting, and walk away with a recommendation, recap decks, and action items \u2014 plus a board that remembers your company next time."}},{"@type":"Question","name":"How is Board Room different from ChatGPT?","acceptedAnswer":{"@type":"Answer","text":"ChatGPT gives you one fluent, agreeable voice with no point of view and no memory of your company. Board Room gives you 4 to 8 distinct advisers chosen for your decision, who disagree with each other and with you, remember your prior meetings, and hand you a structured set of deliverables. It is a decision environment, not a chat."}},{"@type":"Question","name":"Why not just hire a real advisory board?","acceptedAnswer":{"@type":"Answer","text":"You should \u2014 and Board Room does not replace one. A real board takes months to assemble, costs equity, and meets rarely. Board Room is the board you can convene tonight, on the exact question in front of you, for the cost of a subscription."}},{"@type":"Question","name":"What do I walk away with?","acceptedAnswer":{"@type":"Answer","text":"A recommendation, a full transcript, minutes, a 3-slide executive summary, an 8 to 12 slide full recap deck, and an action-item list you can export to CSV or calendar \u2014 plus, on paid plans, an audio recording and a board that remembers it all next time."}},{"@type":"Question","name":"Will my company information stay private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your data is isolated to your account, you can export all of it in one click, and you can delete it permanently. The room is yours."}}]}</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <svg class="brand-mk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Nivio">
+<defs>
+<linearGradient id="cmN" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="50%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+<linearGradient id="cmEW" x1="0" y1="0.5" x2="1" y2="0.5"><stop offset="0%" stop-color="#1E3A8A"/><stop offset="50%" stop-color="#2563EB"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+</defs>
+<circle cx="50" cy="50" r="40" fill="#0A1540" stroke="#1E40AF" stroke-width="1.2"/>
+<polygon points="50,10 55,44 45,44" fill="url(#cmN)"/>
+<polygon points="50,90 54,56 46,56" fill="#1E40AF" opacity="0.65"/>
+<polygon points="90,50 56,46 56,54" fill="url(#cmEW)" opacity="0.7"/>
+<polygon points="10,50 44,46 44,54" fill="url(#cmEW)" opacity="0.7"/>
+<circle cx="50" cy="50" r="9" fill="#0A1540" stroke="#3B82F6" stroke-width="1.2"/>
+<circle cx="50" cy="50" r="4.5" fill="#3B82F6"/>
+<circle cx="50" cy="50" r="2" fill="#DBEAFE"/>
+<circle cx="50" cy="10" r="2.5" fill="#DBEAFE"/>
+</svg>
+      <span class="brand-n">Nivio</span>
+      <span class="brand-s">Board Room</span>
+    </a>
+    <div class="nav-c">
+      <a class="nav-a" href="index.html">Home</a>
+      <a class="nav-a" href="dispatch.html">Dispatch</a>
+      <a class="nav-a" href="marketer.html">Marketer</a>
+      <a class="nav-a" href="bind.html">Bind</a>
+      <a class="nav-a" href="carrier-shield.html">Carrier Shield</a>
+      <a class="nav-a" href="vet.html">Vet</a>
+      <a class="nav-a active" href="board-room.html">Board Room</a>
+    </div>
+    <div class="nav-r">
+      <span class="pill-live">Real-time · always</span>
+      <a class="btn ghost" href="#">Sign in</a>
+      <a class="btn p" href="#cta">Get started <span class="arr">→</span></a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- TICKER -->
+<div class="tape">
+  <div class="tape-run">
+    <span class="ti"><span class="s">ON THE TABLE</span><span class="v">Raise prices 12%?</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">YOUR BOARD</span><span class="v">4–8 advisers, you choose</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">THE CAST</span><span class="v">Rockefeller · Carnegie · Ford · Edison</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">EVERY MEETING</span><span class="v">transcript · minutes · decks · action items</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">MEMORY</span><span class="v">your board remembers every session</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">BY DESIGN</span><span class="v">they disagree, on purpose</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">FORMATS</span><span class="v">15 / 30 / 45-min live sessions</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">ON THE TABLE</span><span class="v">Raise prices 12%?</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="bdg-tag">New</span>
+          Your AI board of advisors
+          <span class="arr">→</span>
+        </div>
+        <h1 class="hero-h">The board you've<br>always wanted —<br><span class="grad">on demand.</span></h1>
+        <p class="hero-sub">The decisions that matter most are the ones you can't crowdsource — your team's too close, your friends lack context, and a real board takes months to assemble. <b>Build a board of 4–8 advisers, sit down for a live meeting, and walk out with a recommendation</b> — recap decks, action items, and a board that remembers it all next time.</p>
+        <div class="hero-btns">
+          <a class="btn p lg" href="#cta">Start free <span class="arr">→</span></a>
+          <a class="btn s lg" href="#modules">See how it works</a>
+        </div>
+        <div class="hero-signals">
+          <div class="sig"><span class="d"></span><span class="v">4–8</span><span class="l">advisers you pick</span></div>
+          <div class="sig"><span class="d"></span><span class="v">Live</span><span class="l">15 / 30 / 45-min</span></div>
+          <div class="sig"><span class="d"></span><span class="v">Every meeting</span><span class="l">decks + action items</span></div>
+          <div class="sig"><span class="d"></span><span class="v">Memory</span><span class="l">it knows your company</span></div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-stack">
+          <div class="float-card fc1">
+            <div class="icn">✦</div>
+            <div>
+              <div class="t">Board convened</div>
+              <div class="s"><b>5 advisers</b> · in the room</div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="pc-bar">
+              <div class="pc-lights"><span></span><span></span><span></span></div>
+              <div class="pc-url"><span>niviolab.com/board/<b>session</b></span></div>
+              <span class="pc-live">In session</span>
+            </div>
+            <div class="pc-body">
+              <div class="pc-topbar">
+                <div class="pc-tabs">
+                  <span class="pc-tab">Board</span>
+                  <span class="pc-tab active">Meeting</span>
+                  <span class="pc-tab">Memory</span>
+                  <span class="pc-tab">Deliverables</span>
+                </div>
+                <div class="pc-meta mono"><span>MEETING-0142</span><span>·</span><span>Live · 30 min</span><span>·</span><b>5 advisers</b></div>
+              </div>
+
+              <div class="pc-hero">
+                <div class="pc-hero-l">
+                  <div class="pc-plan-lbl"><span>On the table</span><span>Decision</span></div>
+                  <div class="pc-plan-val" style="font-size:1.15rem;line-height:1.25">Raise prices <span class="grad">12%</span> — or hold to protect the relationship?</div>
+                  <div class="pc-plan-sub">Your three biggest accounts haven't seen an increase in 3 years.</div>
+                </div>
+                <div class="pc-hero-r">
+                  <div class="pc-pill">
+                    <div class="l">Advisers weighing in</div>
+                    <div class="v">5 <span class="up">↑</span></div>
+                  </div>
+                  <div class="pc-pill">
+                    <div class="l">Recalled from memory</div>
+                    <div class="v">2 prior meetings <span class="up" style="color:var(--cobalt)">◆</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pc-list">
+                <div class="pc-list-hdr"><span>Seat</span><span>Adviser</span><span>Take</span><span class="r">Vote</span><span class="r">◦</span></div>
+                <div class="pc-row take"><span class="id">JDR</span><span class="cp">Rockefeller</span><span class="gr">"Raise it. Hold the line."</span><span class="px">For</span><span class="tk"><i class="ok">✓</i></span></div>
+                <div class="pc-row take"><span class="id">HF</span><span class="cp">Ford</span><span class="gr">"Tie it to more value."</span><span class="px">For</span><span class="tk"><i class="ok">✓</i></span></div>
+                <div class="pc-row"><span class="id">NET</span><span class="cp">Network Builder</span><span class="gr">"Call your top account first."</span><span class="px">Caution</span><span class="tk"><span class="no"></span></span></div>
+                <div class="pc-row take"><span class="id">HG</span><span class="cp">Hetty Green</span><span class="gr">"Lose two, still win."</span><span class="px">For</span><span class="tk"><i class="ok">✓</i></span></div>
+                <div class="pc-row"><span class="id">TRN</span><span class="cp">Turnaround Spec.</span><span class="gr">"What if they undercut?"</span><span class="px">Probe</span><span class="tk"><span class="no"></span></span></div>
+              </div>
+
+              <div class="pc-cta">
+                <div class="txt">The room leans yes — phased, relationship-first. <b>Decide and save the meeting?</b></div>
+                <a class="btn p" href="#">Save &amp; export <span class="arr">→</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-card fc2">
+            <div class="t">On the roster</div>
+            <div class="v">24 <span class="grad">advisers</span></div>
+            <div class="u">↑ real figures + archetypes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS / THE CAST -->
+<section class="logos">
+  <div class="container">
+    <p class="logos-lbl">A roster of history's great builders and operators — plus modern operating archetypes</p>
+    <div class="logos-row">
+      <span class="logo-mark serif">Rockefeller</span>
+      <span class="logo-mark">Carnegie</span>
+      <span class="logo-mark serif">Ford</span>
+      <span class="logo-mark mono">EDISON</span>
+      <span class="logo-mark serif">Mary Kay Ash</span>
+      <span class="logo-mark">Sam Walton</span>
+      <span class="logo-mark mono">+ 12 ARCHETYPES</span>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES / BENTO -->
+<section class="sec" id="modules">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">What you get</div>
+      <h2 class="sec-h">A real board meeting — <span class="grad">whenever you need one.</span></h2>
+      <p class="sec-dek">Cast the room on purpose, put the decision on the table, and let the advisers argue it out. You walk away with a call, the artifacts, and a board that remembers.</p>
+    </div>
+    <div class="bento">
+      <div class="bx w3 tall">
+        <div class="bx-k"><span class="dot"></span>01 · Build your own board</div>
+        <div class="bx-h">Cast the room on purpose.</div>
+        <p>Assemble 4–8 advisers from a curated 24-persona roster — public-domain greats alongside modern operating archetypes. A board for fundraising can look nothing like a board for ops. You get the exact mix the decision needs — not whoever's on your calendar.</p>
+        <div class="bx-visual" style="display:flex;flex-wrap:wrap;gap:7px;align-content:flex-start">
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Rockefeller</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Carnegie</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">J.P. Morgan</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Ford</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Edison</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Vanderbilt</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Sam Walton</span>
+          <span style="background:#fff;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:var(--ink2)">Estée Lauder</span>
+          <span style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.22);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:#6D28D9">The Frugal Founder</span>
+          <span style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.22);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:#6D28D9">The Turnaround Specialist</span>
+          <span style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.22);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:#6D28D9">The Growth Hacker</span>
+          <span style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.22);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500;color:#6D28D9">The Data Magnate</span>
+          <span style="background:transparent;border:1px dashed var(--rule2);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;color:var(--ink4)">+ 12 more</span>
+        </div>
+        <div class="bx-meta"><span>Roster</span><b>24 advisers</b></div>
+      </div>
+
+      <div class="bx w3">
+        <div class="bx-k"><span class="dot"></span>02 · Live boardroom meetings</div>
+        <div class="bx-h">A real meeting, not a chat log.</div>
+        <p>Run a structured, synchronous session in 15, 30, or 45 minutes. Advisers speak in turn, react to each other, challenge your framing, and converge on a recommendation — in real time. You leave with a decision, not a transcript to read later.</p>
+        <div class="bx-meta"><span>Formats</span><b>15 / 30 / 45-min</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>03 · Persona-faithful counsel</div>
+        <div class="bx-h">The thinker, not a name tag.</div>
+        <p>Each adviser is grounded in their real public record. A Ford talks throughput; a Rockefeller talks margin and discipline — so you can weigh the advice the way you would in the room.</p>
+        <div class="bx-meta"><span>Built from</span><b>Primary sources</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>04 · Dissent by design</div>
+        <div class="bx-h">Someone always argues back.</div>
+        <p>The room is built to surface disagreement, not manufacture consensus. You see where your board splits and why — the antidote to the agreeable, single-voice answer.</p>
+        <div class="bx-meta"><span>Output</span><b>A sharper argument</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>05 · Persistent memory</div>
+        <div class="bx-h">It remembers your company.</div>
+        <p>Your board recalls your prior decisions and how they played out, so meetings build on each other instead of starting cold. The relationship compounds.</p>
+        <div class="bx-meta"><span>Memory</span><b>Builds over time</b></div>
+      </div>
+
+      <div class="bx w-half">
+        <div class="bx-k"><span class="dot"></span>06 · Accountability loop</div>
+        <div class="bx-h">It follows up.</div>
+        <p>Next meeting opens with the commitments you made last time, and asks you to account for them.</p>
+        <div class="bx-meta"><span>Plan</span><b>Starter and up</b></div>
+      </div>
+
+      <div class="bx w4">
+        <div class="bx-k"><span class="dot"></span>07 · Every meeting ends with deliverables</div>
+        <div class="bx-h">The thinking doesn't evaporate.</div>
+        <p>Each session produces a full transcript, structured minutes, a 3-slide executive summary, an 8–12 slide full recap, and an action-item list you can export to CSV or calendar — plus an audio recording on paid plans. Forward it to a co-founder, drop it in a board update, or revisit it before you execute.</p>
+        <div class="bx-meta"><span>Per meeting</span><b>6 artifacts</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE ROOM / ROSTER -->
+<section class="sec alt">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">The room</div>
+      <h2 class="sec-h">Twenty-four advisers. <span class="grad">You pick the table.</span></h2>
+      <p class="sec-dek">Half are documented, public-domain figures who present as themselves. Half are timeless operating archetypes for the modern, fast-moving calls a single biography can't cover.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1000px;margin:0 auto">
+      <div style="background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--cobalt);margin-bottom:6px">12 real figures</div>
+        <div style="font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:12px">Built from the record</div>
+        <p style="font-size:13.5px;color:var(--ink3);line-height:1.6;margin:0 0 14px">Public-domain leaders who present as themselves — their real frameworks, quotes, and context.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;color:var(--ink2)">
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Rockefeller</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Carnegie</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">J.P. Morgan</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Edison</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Ford</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Madam C.J. Walker</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Hetty Green</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Mary Kay Ash</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Sam Walton</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Estée Lauder</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">Ray Kroc</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">+ more</span>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--violet);margin-bottom:6px">12 archetypes</div>
+        <div style="font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:12px">Modern operating lenses</div>
+        <p style="font-size:13.5px;color:var(--ink3);line-height:1.6;margin:0 0 14px">Role-based advisers for fast-moving domains a single biography can't cover.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;color:var(--ink2)">
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Luxury Strategist</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Enterprise Hunter</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Data Magnate</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Frugal Founder</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Platform Architect</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Turnaround Specialist</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Growth Hacker</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Customer Champion</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">The Culture Architect</span>
+          <span style="background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:5px 11px">+ more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">How it works</div>
+      <h2 class="sec-h">From a hard call to <span class="grad">a decision you can act on.</span></h2>
+      <p class="sec-dek">Five steps. One live meeting. No board to schedule.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="idx">1</div><div class="stg">Build</div><div class="when">In seconds</div><div class="txt"><b>Cast the room</b> — pick the 4–8 advisers the decision needs.</div></div>
+      <div class="step"><div class="idx">2</div><div class="stg">Table it</div><div class="when">Your words</div><div class="txt">Put the decision on the table — <b>in plain English</b>.</div></div>
+      <div class="step"><div class="idx">3</div><div class="stg">Meet</div><div class="when">15–45 min</div><div class="txt">The advisers debate, <b>disagree</b>, and converge — live.</div></div>
+      <div class="step"><div class="idx">4</div><div class="stg">Decide</div><div class="when">End of meeting</div><div class="txt">Walk out with a recommendation — and <b>the deliverables</b>.</div></div>
+      <div class="step"><div class="idx">5</div><div class="stg">Remember</div><div class="when">Next time</div><div class="txt">Your board <b>recalls it</b> and follows up on what you committed to.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF / METHODOLOGY -->
+<section class="sec alt">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">How we build a board member</div>
+      <h2 class="sec-h">Not a prompt in a costume. <span class="grad">A sourced spec.</span></h2>
+      <p class="sec-dek">Persona-faithful counsel only counts if it's real. Here's the standard every adviser clears before they're allowed in the room.</p>
+    </div>
+    <div class="bento">
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>Primary-source grounding</div>
+        <div class="bx-h">Built from the record.</div>
+        <p>Each adviser is ingested from the available primary record — books, letters, interviews, speeches — not a one-line prompt.</p>
+      </div>
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>A real spec</div>
+        <div class="bx-h">Frameworks, not vibes.</div>
+        <p>Every adviser has a documented specification: their core frameworks, mental models, signature phrases, and decision heuristics.</p>
+      </div>
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>An authenticity bar</div>
+        <div class="bx-h">Tested before they ship.</div>
+        <p>Each persona is scored in-character on a voice-fidelity rubric. Fall short, and they're rebuilt with deeper sourcing before joining the roster.</p>
+      </div>
+      <div class="bx w3">
+        <div class="bx-k"><span class="dot"></span>Dissent is engineered</div>
+        <div class="bx-h">Tension on purpose.</div>
+        <p>Advisers are built with distinct debate postures, so the room produces genuine disagreement — not an echo of your own thinking back at you.</p>
+        <div class="bx-meta"><span>Result</span><b>A room that argues</b></div>
+      </div>
+      <div class="bx w3">
+        <div class="bx-k"><span class="dot"></span>Your data, yours</div>
+        <div class="bx-h">The candor of a private room.</div>
+        <p>Strict per-user isolation, one-click export of everything, and permanent delete on request. Speak freely — the room is yours.</p>
+        <div class="bx-meta"><span>Control</span><b>Export · delete anytime</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">Plans</div>
+      <h2 class="sec-h">Memory is what <span class="grad">you're paying for.</span></h2>
+      <p class="sec-dek">Four plans and a 7-day free trial. The deeper your plan, the more your board remembers — and the more useful it gets.</p>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="k"><span>Entry</span><span class="tag">Get in the room</span></div>
+        <div class="v"><span class="grad">$49<span class="u">/mo</span></span></div>
+        <div class="bar" style="--w:25%"></div>
+        <p class="note">Build a board and run live meetings, with every meeting's transcript, minutes, recap decks, and action items.</p>
+      </div>
+      <div class="kpi">
+        <div class="k"><span>Starter</span><span class="tag">Memory</span></div>
+        <div class="v"><span class="grad">$149<span class="u">/mo</span></span></div>
+        <div class="bar" style="--w:50%"></div>
+        <p class="note">Adds memory of your last 7 meetings, the accountability loop, and audio recordings to listen back.</p>
+      </div>
+      <div class="kpi">
+        <div class="k"><span>Pro</span><span class="tag">Most popular</span></div>
+        <div class="v"><span class="grad">$299<span class="u">/mo</span></span></div>
+        <div class="bar" style="--w:80%"></div>
+        <p class="note">Unlimited memory within a board — it truly knows your company, every decision, and how it played out.</p>
+      </div>
+      <div class="kpi">
+        <div class="k"><span>Scale</span><span class="tag">Coming soon</span></div>
+        <div class="v"><span class="grad">$899<span class="u">/mo</span></span></div>
+        <div class="bar" style="--w:100%"></div>
+        <p class="note">Cross-board recall — insight compounds across every board you run. Rolling out to the Scale tier.</p>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:var(--ink4);margin-top:22px;max-width:760px;margin-left:auto;margin-right:auto">On the roadmap, clearly separate from what's live today: voice meetings, audio recaps as a podcast feed, cross-board recall, and integrations (calendar, Notion, Slack) with a public API.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="q-wrap">
+  <div class="container">
+    <div class="q-card">
+      <div class="q-mark">"</div>
+      <p class="q-text">The decisions that matter most are the ones you can't crowdsource. <span class="grad">Board Room is the room you convene at 11pm</span> — when the real board meets next quarter, and the call is due tonight.</p>
+      <div class="q-by">
+        <div class="q-person">
+          <div class="q-avatar">✦</div>
+          <div class="q-who">The board you've always wanted<span class="s">On demand · with memory · dissent by design</span></div>
+        </div>
+        <span class="q-badge">◆ 7-day free trial</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding:80px 0;border-top:1px solid var(--rule)"><div class="container" style="max-width:840px"><div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px">FAQ</div><h2 style="font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.025em;margin-bottom:30px;color:var(--ink)">Common questions</h2><div style="display:flex;flex-direction:column;gap:20px"><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">How is this different from ChatGPT?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">ChatGPT gives you one fluent, agreeable voice with no point of view of its own and no memory of your company. Board Room gives you 4–8 distinct advisers chosen for your decision, who disagree with each other and with you, remember your prior meetings, and hand you a structured set of deliverables. It's a decision environment, not a chat.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">Isn't this just impersonating people?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">The real figures are public-domain and built from their documented record against an authenticity standard. The archetype advisers aren't impersonations of anyone — they're role-based operating lenses. The goal isn't a séance; it's access to durable frameworks, applied to your situation.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">Why not just hire a real advisory board?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">You should — and Board Room doesn't replace one. A real board takes months to assemble, costs equity, and meets rarely. Board Room is the board you can convene tonight, on the exact question in front of you, for the cost of a subscription. It complements the human board; it doesn't pretend to be it.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">What do I actually walk away with?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">A recommendation, a full transcript, structured minutes, a 3-slide executive summary, an 8–12 slide full recap deck, and an action-item list you can export to CSV or calendar — plus, on paid plans, an audio recording and a board that remembers all of it next time.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">Will my company's information stay private?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">Yes. Your data is isolated to your account, you can export all of it in one click, and you can delete it permanently. The room is yours — speak freely.</p></div></div></div></section>
+<section style="padding:64px 0;border-top:1px solid var(--rule)"><div class="container"><div style="display:flex;gap:22px;align-items:flex-start;max-width:880px;margin:0 auto;padding:34px;background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(139,92,246,.04));border:1px solid rgba(37,99,235,.12);border-radius:18px"><div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--cobalt3),var(--violet));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.25rem;flex-shrink:0">A</div><div><p style="font-size:1.05rem;line-height:1.7;color:var(--ink2);font-style:italic;margin:0 0 12px">"I made every big call at my company alone, with no board to pressure-test it. Board Room is the cabinet I wish I'd had in the room. So we built it."</p><div style="font-size:.85rem;color:var(--ink3)"><b style="color:var(--ink)">Founder, Nivio</b> — Former bulk fleet operator, 2012–2022.</div></div></div></div></section>
+
+<!-- CTA -->
+<section class="cta-wrap" id="cta">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-inner">
+        <div>
+          <div class="cta-badge">◆ 7-day free trial</div>
+          <h2 class="cta-h">Convene your first board <span class="grad">tonight.</span></h2>
+          <p>Pick your advisers, put the decision you're wrestling with on the table, and run a live meeting. <b>Free for 7 days — no board to schedule.</b></p>
+          <div class="cta-btns">
+            <a class="btn p lg" href="mailto:admin@nivio-optimize.com?subject=Nivio Board Room — Start free">Start free <span class="arr">→</span></a>
+            <a class="btn s lg" href="mailto:admin@nivio-optimize.com?subject=Nivio Board Room — Question">Talk to the founder</a>
+          </div>
+        </div>
+        <div class="cta-side">
+          <div class="cta-side-hdr"><span>Getting started</span><b>Tonight</b></div>
+          <div class="cta-step"><div class="n">1</div><div><div class="t">Build your board</div><div class="d">4–8 advisers from the roster</div></div></div>
+          <div class="cta-step"><div class="n">2</div><div><div class="t">Table your decision</div><div class="d">The call you're wrestling with</div></div></div>
+          <div class="cta-step"><div class="n">3</div><div><div class="t">Run the live meeting</div><div class="d">Hear the room argue it out</div></div></div>
+          <div class="cta-step"><div class="n">4</div><div><div class="t">Walk out with a plan</div><div class="d">Recommendation, decks, action items</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><div class="brand-mk">A</div><span class="brand-n">Nivio</span></div>
+        <p class="foot-blurb">Modernizing the work that moves the world — operator-built software for trucking, bulk commodities, and the insurance around them.</p>
+      </div>
+      <div><h5>Products</h5><ul><li><a href="dispatch.html">Dispatch</a></li><li><a href="marketer.html">Marketer</a></li><li><a href="bind.html">Bind</a></li><li><a href="carrier-shield.html">Carrier Shield</a></li><li><a href="vet.html">Vet</a></li><li><a href="board-room.html">Board Room</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="index.html">Home</a></li><li><a href="mailto:admin@nivio-optimize.com?subject=Nivio%20%E2%80%94%20Hello">Contact</a></li></ul></div>
+      <div><h5>Get started</h5><ul><li><a href="mailto:admin@nivio-optimize.com?subject=Nivio%20%E2%80%94%20Early%20access">Early access · 2026 cohort</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Nivio. Built by operators, for the people who move the world.</span>
+      <span class="mono">admin@nivio-optimize.com</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

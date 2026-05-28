@@ -1,0 +1,19 @@
+# Nivio
+
+> Nivio modernizes the work that moves the world — operator-built software for trucking, bulk commodities, and the insurance around them. Six products powered by Proprietary Algorithms, built by Kosta Kefalos, a former bulk fleet operator who ran 100 trucks across five regions from 2012 to 2022. Pre-revenue, taking first customers (2026 cohort).
+
+## Products
+
+- [Nivio Dispatch](https://niviolab.com/dispatch): Bulk fleet dispatch software. Plans an entire shift — loads, drivers, trucks, HOS, and commodity rules — in minutes using a Proprietary Algorithm that evaluates 5M+ combinations. For bulk trucking fleets of 50–5,000 trucks. $2/driver/day. Proven: ~$599K/yr saved on a 75-truck sand fleet, ~$1.48M/yr on a 120-truck fuel fleet.
+- [Nivio Marketer](https://niviolab.com/marketer): Operating system for bulk commodity marketing desks. Plan, contract, route, and settle every physical commodity move (crude, refined products, biofuels, NGLs, grains) on one surface with a complete audit trail. A deterministic constraint solver, not a trading platform.
+- [Nivio Bind](https://niviolab.com/bind): Trucking insurance submission software for the insurance brokers who place coverage. Returns a carrier risk verdict in under 200ms — composite A–F score, nuclear-verdict flags, chameleon detection, litigation history — across 800K pre-scored carriers on 31M+ rows of data. For insurance brokers placing trucking coverage; the underwriter receives the package and prices it.
+- [Nivio Carrier Shield](https://niviolab.com/carrier-shield): Carrier-side insurance platform for fleet owners. Find insurers, manage onboarding, and defend premiums by turning ELD, CSA, and claims data into a continuously updated renewal narrative. Pilot fleets average 18% premium savings.
+- [Nivio Vet](https://niviolab.com/vet): Carrier vetting software for freight brokers. Returns a full carrier vet — authority, insurance, CSA, nuclear-verdict flags, chameleon detection, litigation — in 5 seconds, inline in the broker's TMS.
+- [Nivio Board Room](https://niviolab.com/board-room): On-demand AI advisory board for SMBs. Convene a personal cabinet of expert AI advisor personas and run structured boardroom-style decisions with persistent memory and a searchable archive.
+
+## Company
+
+- Founder: Kosta Kefalos — former bulk fleet operator (100 trucks, 2012–2022)
+- Contact: admin@nivio-optimize.com
+- Data: 31M+ rows of carrier and industry data; 800K carriers pre-scored
+- Tagline: Modernizing the work that moves the world

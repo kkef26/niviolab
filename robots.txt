@@ -1,0 +1,5 @@
+# Nivio — robots.txt
+User-agent: *
+Allow: /
+
+# AI search crawlers e

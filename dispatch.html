@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nivio Dispatch — Bulk Fleet Dispatch & Route Optimization</title>
+<meta name="description" content="Plan an entire bulk fleet shift in minutes — optimal loads and drivers, HOS-compliant and pushed to your TMS. Built by a fleet operator.">
+<link rel="canonical" href="https://niviolab.com/dispatch">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nivio">
+<meta property="og:title" content="Nivio Dispatch — Bulk Fleet Dispatch & Route Optimization">
+<meta property="og:description" content="Plan an entire bulk fleet shift in minutes — optimal loads and drivers, HOS-compliant and pushed to your TMS. Built by a fleet operator.">
+<meta property="og:url" content="https://niviolab.com/dispatch">
+<meta property="og:image" content="https://niviolab.com/og/dispatch.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nivio Dispatch — Bulk Fleet Dispatch & Route Optimization">
+<meta name="twitter:description" content="Plan an entire bulk fleet shift in minutes — optimal loads and drivers, HOS-compliant and pushed to your TMS. Built by a fleet operator.">
+<meta name="twitter:image" content="https://niviolab.com/og/dispatch.png">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Nivio Dispatch","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Plan an entire bulk fleet shift in minutes \u2014 optimal loads and drivers, HOS-compliant and pushed to your TMS. Built by a fleet operator.","url":"https://niviolab.com/dispatch","publisher":{"@type":"Organization","name":"Nivio","url":"https://niviolab.com/"},"offers":{"@type":"Offer","price":"2","priceCurrency":"USD","description":"per driver per day"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Nivio","item":"https://niviolab.com/"},{"@type":"ListItem","position":2,"name":"Nivio Dispatch","item":"https://niviolab.com/dispatch"}]}]</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF;--bg2:#F7F8FB;--bg3:#EEF1F7;
+  --ink:#0A0F1F;--ink2:#1F2A44;--ink3:#4A5675;--ink4:#8994B0;--ink5:#C7CEDD;
+  --cobalt:#2563EB;--cobalt2:#1D4ED8;--cobalt3:#3B82F6;--cobalt4:#60A5FA;--cobalt-soft:#EFF3FF;
+  --mint:#10B981;--amber:#F59E0B;--rose:#F43F5E;--violet:#8B5CF6;
+  --rule:#E5E9F2;--rule2:#D0D6E4;
+  --shadow-sm:0 1px 2px rgba(10,15,31,.04),0 2px 6px rgba(10,15,31,.05);
+  --shadow-md:0 2px 4px rgba(10,15,31,.05),0 10px 28px rgba(10,15,31,.08);
+  --shadow-lg:0 8px 24px rgba(10,15,31,.08),0 24px 60px rgba(37,99,235,.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','ss02','cv11'}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:'zero','ss01'}
+.container{max-width:1280px;margin:0 auto;padding:0 28px}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mk{width:34px;height:34px;display:block;flex-shrink:0;border-radius:6px;background:transparent;padding:0}
+.brand-n{font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--ink)}
+.brand-s{font-size:11px;color:var(--ink4);margin-left:8px;padding-left:10px;border-left:1px solid var(--rule2);font-weight:500}
+.nav-c{flex:1;display:flex;justify-content:center;gap:2px}
+.nav-a{padding:8px 12px;font-size:13.5px;font-weight:500;color:var(--ink3);border-radius:8px;transition:all .18s;letter-spacing:-.005em;white-space:nowrap}
+.nav-a:hover{color:var(--ink);background:var(--bg2)}
+.nav-a.active{color:var(--cobalt);background:var(--cobalt-soft)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.pill-live{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(16,185,129,.08);color:var(--mint);border:1px solid rgba(16,185,129,.2);border-radius:999px;font-size:11.5px;font-weight:600}
+.pill-live::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;font-size:13.5px;font-weight:600;letter-spacing:-.005em;transition:all .18s;cursor:pointer;border:1px solid transparent;font-family:inherit}
+.btn.p{background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 4px 14px -2px rgba(37,99,235,.35)}
+.btn.p:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 22px -4px rgba(37,99,235,.45)}
+.btn.s{background:var(--bg);color:var(--ink);border-color:var(--rule2);box-shadow:var(--shadow-sm)}
+.btn.s:hover{border-color:var(--cobalt);color:var(--cobalt)}
+.btn.lg{padding:13px 22px;font-size:14.5px;border-radius:12px}
+.btn.ghost{background:transparent;color:var(--ink2);padding:9px 14px}
+.btn.ghost:hover{color:var(--cobalt);background:var(--cobalt-soft)}
+.btn .arr{transition:transform .18s}
+.btn:hover .arr{transform:translateX(2px)}
+
+/* TICKER */
+.tape{background:var(--bg2);border-bottom:1px solid var(--rule);padding:8px 0;overflow:hidden;position:relative}
+.tape-run{display:flex;gap:28px;animation:slide 80s linear infinite;white-space:nowrap;padding-left:100%;font-size:11.5px;font-weight:500;color:var(--ink3);font-family:'Geist Mono',monospace}
+@keyframes slide{to{transform:translateX(-100%)}}
+.ti{display:inline-flex;gap:6px;align-items:center}
+.ti .s{color:var(--ink4);font-weight:600}
+.ti .v{color:var(--ink2);font-weight:600}
+.ti .u{color:var(--mint);font-weight:600}
+.ti .d{color:var(--rose);font-weight:600}
+.ti-sep{color:var(--ink5);opacity:.7}
+
+/* HERO */
+.hero{padding:72px 0 80px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(37,99,235,.18),rgba(139,92,246,.1) 40%,transparent 65%);top:-400px;right:-300px;filter:blur(40px);pointer-events:none;z-index:0}
+.hero-orb.o2{top:300px;left:-400px;right:auto;width:600px;height:600px;background:radial-gradient(circle at 40% 40%,rgba(16,185,129,.1),transparent 65%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(10,15,31,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(10,15,31,.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 30%,black 10%,transparent 70%);pointer-events:none;z-index:0}
+.hero-inner{display:grid;grid-template-columns:1.05fr 1.1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 6px 5px 12px;background:var(--bg);border:1px solid var(--rule2);border-radius:999px;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:28px;box-shadow:var(--shadow-sm)}
+.hero-badge .bdg-tag{padding:3px 10px;background:linear-gradient(135deg,var(--cobalt),var(--violet));color:#fff;border-radius:999px;font-size:10.5px;font-weight:700}
+.hero-badge .arr{font-size:13px;margin-left:2px;color:var(--ink3)}
+.hero-h{font-size:clamp(3rem,5.6vw,4.6rem);font-weight:700;letter-spacing:-.042em;line-height:1;margin-bottom:22px;color:var(--ink);text-wrap:balance}
+.hero-h .grad{background:linear-gradient(135deg,var(--cobalt3) 0%,var(--violet) 60%,var(--cobalt) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero-sub{font-size:18px;color:var(--ink3);max-width:540px;line-height:1.5;margin-bottom:32px;font-weight:400}
+.hero-sub b{color:var(--ink);font-weight:600}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;align-items:center}
+.hero-signals{display:flex;flex-wrap:wrap;gap:22px;padding-top:24px;border-top:1px solid var(--rule)}
+.sig{display:flex;align-items:baseline;gap:8px}
+.sig .v{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.sig .l{font-size:12px;color:var(--ink3);font-weight:500}
+.sig .d{width:4px;height:4px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2);margin-right:2px;align-self:center}
+
+/* PRODUCT — dispatch board */
+.product{position:relative}
+.product-card{background:#fff;border:1px solid var(--rule);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;position:relative;z-index:2}
+.pc-bar{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--rule);background:linear-gradient(180deg,#fff,var(--bg2));gap:10px}
+.pc-lights{display:flex;gap:5px}
+.pc-lights span{width:10px;height:10px;border-radius:50%}
+.pc-lights span:nth-child(1){background:#FF5F57}
+.pc-lights span:nth-child(2){background:#FEBC2E}
+.pc-lights span:nth-child(3){background:#28C840}
+.pc-url{flex:1;text-align:center;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink3);background:#fff;border:1px solid var(--rule);border-radius:6px;padding:4px 14px}
+.pc-url b{color:var(--cobalt)}
+.pc-live{font-size:10.5px;font-weight:600;color:var(--mint);display:inline-flex;align-items:center;gap:5px}
+.pc-live::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%}
+
+.pc-body{padding:20px;display:flex;flex-direction:column;gap:14px}
+.pc-topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pc-tabs{display:flex;gap:2px;background:var(--bg2);padding:3px;border-radius:9px}
+.pc-tab{padding:5px 11px;font-size:11.5px;font-weight:500;color:var(--ink3);border-radius:6px;cursor:pointer}
+.pc-tab.active{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);font-weight:600}
+.pc-meta{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--ink4);display:flex;gap:10px}
+.pc-meta b{color:var(--cobalt)}
+
+.pc-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:12px}
+.pc-hero-l{background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(139,92,246,.04));border:1px solid rgba(37,99,235,.12);border-radius:12px;padding:18px}
+.pc-plan-lbl{font-size:10.5px;font-weight:600;color:var(--cobalt);letter-spacing:.02em;margin-bottom:6px;display:flex;justify-content:space-between}
+.pc-plan-lbl span:last-child{color:var(--mint)}
+.pc-plan-val{font-size:2rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:4px}
+.pc-plan-val .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.pc-plan-sub{font-size:11px;color:var(--ink3)}
+.pc-hero-r{display:grid;grid-template-rows:1fr 1fr;gap:8px}
+.pc-pill{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 12px}
+.pc-pill .l{font-size:10px;font-weight:600;color:var(--ink4);letter-spacing:.04em;text-transform:uppercase}
+.pc-pill .v{font-size:15px;font-weight:700;color:var(--ink);margin-top:2px;letter-spacing:-.015em}
+.pc-pill .v .up{color:var(--mint);font-size:12px;font-weight:600}
+
+/* Drivers list in product */
+.pc-list{background:var(--bg2);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.pc-list-hdr{display:grid;grid-template-columns:56px 1.4fr 80px 90px 40px;gap:10px;padding:9px 14px;background:#fff;border-bottom:1px solid var(--rule);font-family:'Geist Mono',monospace;font-size:10px;color:var(--ink4);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pc-list-hdr .r{text-align:right}
+.pc-row{display:grid;grid-template-columns:56px 1.4fr 80px 90px 40px;gap:10px;padding:9px 14px;border-bottom:1px solid var(--rule);align-items:center;font-size:12.5px;font-family:'Geist Mono',monospace;font-variant-numeric:tabular-nums;transition:background .15s}
+.pc-row:hover{background:#fff}
+.pc-row:last-child{border:none}
+.pc-row.take{background:rgba(37,99,235,.04)}
+.pc-row .id{color:var(--cobalt);font-weight:700}
+.pc-row .cp{color:var(--ink);font-weight:500;font-family:'Geist',sans-serif;display:flex;align-items:center;gap:6px}
+.pc-row .av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--cobalt3),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;font-family:'Geist',sans-serif}
+.pc-row .lane{color:var(--ink3);font-family:'Geist Mono',monospace}
+.pc-row .eta{color:var(--ink);text-align:right;font-weight:500}
+.pc-row .tk{text-align:right}
+.pc-row .tk .ok{display:inline-block;width:22px;height:22px;background:linear-gradient(135deg,var(--cobalt3),var(--cobalt));color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:11px;font-weight:700;font-family:'Geist',sans-serif}
+.pc-row .tk .late{background:linear-gradient(135deg,var(--amber),#F97316)}
+.pc-row .tk .idle{background:var(--ink5);color:#fff}
+
+.pc-cta{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(139,92,246,.06));border:1px solid rgba(37,99,235,.15);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pc-cta .txt{font-size:12.5px;color:var(--ink2);font-weight:500}
+.pc-cta .txt b{color:var(--cobalt);font-weight:700}
+.pc-cta .btn{padding:6px 12px;font-size:12px;border-radius:7px}
+
+.float-card{position:absolute;background:#fff;border:1px solid var(--rule);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-md);z-index:3;font-size:12px}
+.float-card.fc1{top:-24px;left:-32px;display:flex;align-items:center;gap:10px}
+.float-card.fc1 .icn{width:36px;height:36px;background:linear-gradient(135deg,var(--mint),#059669);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+.float-card.fc1 .t{font-weight:600;font-size:13px;color:var(--ink)}
+.float-card.fc1 .s{color:var(--ink3);font-size:11.5px}
+.float-card.fc1 .s b{color:var(--mint)}
+.float-card.fc2{bottom:-20px;right:-28px;min-width:200px}
+.float-card.fc2 .t{font-size:10.5px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.float-card.fc2 .v{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.float-card.fc2 .v .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.float-card.fc2 .u{font-size:12px;color:var(--mint);font-weight:600;margin-top:6px;display:flex;align-items:center;gap:4px}
+
+/* LOGOS */
+.logos{padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--bg2)}
+.logos-lbl{text-align:center;font-size:12px;font-weight:500;color:var(--ink3);margin-bottom:22px}
+.logos-row{display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;opacity:.75}
+.logo-mark{font-family:'Geist',sans-serif;font-weight:700;font-size:17px;color:var(--ink3);letter-spacing:-.015em}
+.logo-mark.serif{font-family:Georgia,serif;font-style:italic;font-weight:500}
+.logo-mark.mono{font-family:'Geist Mono',monospace;font-weight:500;font-size:15px}
+
+/* SECTIONS */
+.sec{padding:110px 0;position:relative}
+.sec.alt{background:var(--bg2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.sec-head{text-align:center;margin-bottom:60px;max-width:780px;margin-left:auto;margin-right:auto}
+.sec-kick{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:999px;font-size:12px;font-weight:600;margin-bottom:18px}
+.sec-kick::before{content:'';width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.sec-h{font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:700;letter-spacing:-.035em;line-height:1.04;text-wrap:balance;color:var(--ink);margin-bottom:14px}
+.sec-h .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-dek{font-size:17px;color:var(--ink3);line-height:1.5;max-width:620px;margin:0 auto}
+
+/* BENTO */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(180px,auto);gap:16px}
+.bx{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:all .25s}
+.bx:hover{border-color:var(--cobalt3);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.bx-k{font-size:11px;font-weight:600;color:var(--cobalt);letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;display:inline-flex;align-items:center;gap:6px}
+.bx-k .dot{width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.bx-h{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--ink);margin-bottom:8px;text-wrap:balance}
+.bx p{font-size:14px;color:var(--ink3);line-height:1.55}
+.bx-meta{margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule2);font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink4);display:flex;justify-content:space-between}
+.bx-meta b{color:var(--cobalt)}
+.bx.w2{grid-column:span 3}
+.bx.w3{grid-column:span 4}
+.bx.w4{grid-column:span 2}
+.bx.tall{grid-row:span 2}
+.bx-visual{margin-top:16px;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--rule);border-radius:10px;padding:14px;position:relative;overflow:hidden}
+
+/* CAPABILITY TABS */
+.tabwrap{max-width:1040px;margin:0 auto}
+.tabstrip{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.tabbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--rule2);background:var(--bg);color:var(--ink3);border-radius:999px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .18s;letter-spacing:-.01em}
+.tabbtn .n{font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink4)}
+.tabbtn:hover{border-color:var(--cobalt);color:var(--cobalt)}
+.tabbtn.active{background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));color:#fff;border-color:transparent;box-shadow:0 6px 18px -6px rgba(37,99,235,.5)}
+.tabbtn.active .n{color:rgba(255,255,255,.7)}
+.cappanel{display:none;background:var(--bg);border:1px solid var(--rule);border-radius:18px;padding:44px;box-shadow:var(--shadow-lg);min-height:300px}
+.cappanel.active{display:block;animation:capfade .25s ease}
+@keyframes capfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.cap-k{font-size:11px;font-weight:600;color:var(--cobalt);letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px;display:inline-flex;align-items:center;gap:6px}
+.cap-k .dot{width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.cap-h{font-size:1.7rem;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:var(--ink);margin-bottom:14px;text-wrap:balance}
+.cap-txt{font-size:15.5px;color:var(--ink3);line-height:1.6;margin-bottom:20px}
+.cap-meta{font-family:'Geist Mono',monospace;font-size:12px;color:var(--ink4);padding-top:14px;border-top:1px dashed var(--rule2)}
+.cap-meta b{color:var(--cobalt)}
+.cap-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cap-chip{font-size:12.5px;font-weight:500;color:var(--ink2);background:var(--bg2);border:1px solid var(--rule);padding:7px 12px;border-radius:8px}
+.cap-chiplabel{font-size:11px;font-weight:600;color:var(--ink4);letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
+@media(max-width:860px){.cap-grid{grid-template-columns:1fr;gap:28px}.cappanel{padding:28px}}
+
+/* Route map visual */
+.vis-map{height:200px;position:relative;background:linear-gradient(135deg,#F7F8FB 0%,#EEF1F7 100%);border-radius:8px;overflow:hidden}
+.vis-map::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.05) 1px,transparent 1px);background-size:20px 20px}
+.vis-map svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* Bars visual */
+.vis-bars{display:flex;gap:3px;align-items:flex-end;height:80px}
+.vis-bars span{flex:1;background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));border-radius:2px 2px 0 0;opacity:.8;transition:opacity .2s}
+.vis-bars span:hover{opacity:1}
+
+/* Timeline visual */
+.vis-tl{display:flex;flex-direction:column;gap:7px}
+.vis-tl-row{display:grid;grid-template-columns:50px 1fr;gap:10px;align-items:center;font-size:10.5px;font-family:'Geist Mono',monospace;color:var(--ink3)}
+.vis-tl-bar{height:14px;position:relative;background:var(--bg3);border-radius:3px;overflow:hidden}
+.vis-tl-bar span{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--cobalt3),var(--violet));border-radius:2px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;background:#fff;border:1px solid var(--rule);border-radius:20px;padding:36px 24px;box-shadow:var(--shadow-md)}
+.steps::before{content:'';position:absolute;left:10%;right:10%;top:74px;height:2px;background:repeating-linear-gradient(90deg,var(--cobalt) 0 6px,transparent 6px 12px);opacity:.6}
+.step{text-align:center;position:relative;z-index:1;padding:0 12px}
+.step .idx{width:44px;height:44px;margin:0 auto 14px;background:#fff;border:2px solid var(--cobalt);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cobalt);font-weight:700;font-size:17px;box-shadow:0 4px 12px -2px rgba(37,99,235,.25)}
+.step .stg{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.015em}
+.step .when{font-family:'Geist Mono',monospace;font-size:11px;color:var(--cobalt);font-weight:600;margin-bottom:10px}
+.step .txt{font-size:13px;color:var(--ink3);line-height:1.5}
+.step .txt b{color:var(--ink);font-weight:600}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:all .2s}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cobalt3),var(--violet));opacity:0;transition:opacity .2s}
+.kpi:hover{border-color:var(--cobalt3);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi:hover::before{opacity:1}
+.kpi .k{font-size:11px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;display:flex;justify-content:space-between}
+.kpi .k .tag{color:var(--cobalt);background:var(--cobalt-soft);padding:2px 8px;border-radius:999px;text-transform:none;font-size:10.5px;letter-spacing:0}
+.kpi .v{font-size:3rem;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1}
+.kpi .v .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kpi .v .mint{color:var(--mint)}
+.kpi .v .u{font-size:1.1rem;color:var(--ink3);font-weight:600}
+.kpi .note{font-size:13px;color:var(--ink3);margin-top:14px;line-height:1.5}
+
+/* QUOTE */
+.q-wrap{padding:110px 0;background:linear-gradient(180deg,var(--bg),var(--bg2));border-top:1px solid var(--rule);position:relative;overflow:hidden}
+.q-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(37,99,235,.1),transparent 60%);filter:blur(20px);pointer-events:none}
+.q-card{max-width:1000px;margin:0 auto;background:#fff;border:1px solid var(--rule);border-radius:24px;padding:56px 64px;box-shadow:var(--shadow-lg);position:relative}
+.q-mark{position:absolute;top:20px;left:28px;width:48px;height:48px;background:linear-gradient(135deg,var(--cobalt-soft),rgba(139,92,246,.1));border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cobalt);font-size:30px;font-weight:900;font-family:Georgia,serif;line-height:1}
+.q-text{font-size:clamp(1.4rem,2.3vw,1.75rem);font-weight:500;letter-spacing:-.022em;line-height:1.3;color:var(--ink);margin-bottom:32px;padding-left:70px}
+.q-text .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.q-by{padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.q-person{display:flex;align-items:center;gap:14px}
+.q-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cobalt3),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px}
+.q-who{font-size:14.5px;font-weight:600;color:var(--ink)}
+.q-who .s{display:block;font-size:13px;color:var(--ink3);font-weight:500;margin-top:2px}
+.q-badge{padding:6px 14px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:999px;font-size:12px;font-weight:600}
+
+/* CTA */
+.cta-wrap{padding:140px 0;position:relative;overflow:hidden}
+.cta-wrap::before{content:'';position:absolute;top:10%;left:10%;right:10%;bottom:10%;background:radial-gradient(ellipse at center,rgba(37,99,235,.12),transparent 60%);filter:blur(20px);pointer-events:none}
+.cta-card{max-width:1100px;margin:0 auto;background:linear-gradient(135deg,#0A0F1F 0%,#1E293B 100%);color:#fff;border-radius:28px;padding:60px 64px;position:relative;overflow:hidden;box-shadow:0 40px 80px -20px rgba(10,15,31,.4)}
+.cta-card::before{content:'';position:absolute;top:-40%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(37,99,235,.45),transparent 60%);filter:blur(10px);pointer-events:none}
+.cta-card::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 50%,black,transparent 80%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.cta-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(37,99,235,.15);color:var(--cobalt4);border:1px solid rgba(96,165,250,.3);border-radius:999px;font-size:12px;font-weight:600;margin-bottom:22px}
+.cta-h{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:18px}
+.cta-h .grad{background:linear-gradient(135deg,var(--cobalt4),var(--violet),#EC4899);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-card p{font-size:17px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:30px;max-width:520px}
+.cta-card p b{color:#fff;font-weight:600}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.cta-card .btn.p{background:linear-gradient(180deg,var(--cobalt4),var(--cobalt3));box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 8px 24px -4px rgba(37,99,235,.5)}
+.cta-card .btn.s{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.18)}
+.cta-card .btn.s:hover{background:rgba(255,255,255,.12)}
+.cta-side{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px}
+.cta-side-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.cta-side-hdr b{color:var(--cobalt4);letter-spacing:0;text-transform:none;font-size:12px}
+.cta-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.cta-step:last-child{border:none}
+.cta-step .n{width:26px;height:26px;border:1px solid rgba(96,165,250,.4);color:var(--cobalt4);border-radius:7px;font-family:'Geist Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,.1)}
+.cta-step .t{color:#fff;font-size:13.5px;font-weight:600}
+.cta-step .d{font-size:12px;color:rgba(255,255,255,.6);font-weight:400;margin-top:2px}
+
+/* FOOT */
+.foot{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--rule)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--rule)}
+.foot h5{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.foot ul{list-style:none}
+.foot li{font-size:13.5px;color:var(--ink3);margin-bottom:9px;font-weight:500}
+.foot li a:hover{color:var(--cobalt)}
+.foot-blurb{font-size:14px;color:var(--ink3);max-width:380px;line-height:1.55;margin-top:14px}
+.foot-bottom{padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink4)}
+
+@media(max-width:1080px){
+  .hero-inner,.bento,.steps,.kpi-grid,.cta-inner,.foot-grid{grid-template-columns:1fr}
+  .bx.w2,.bx.w3,.bx.w4{grid-column:span 1}
+  .bx.tall{grid-row:auto}
+  .steps::before{display:none}
+  .nav-c{display:none}
+  .q-text{padding-left:0;padding-top:40px}
+  .q-mark{left:50%;transform:translateX(-50%)}
+  .float-card{display:none}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Nivio Dispatch?","acceptedAnswer":{"@type":"Answer","text":"Nivio Dispatch is bulk fleet dispatch software that plans an entire shift \u2014 loads, drivers, trucks, HOS, and commodity rules \u2014 in minutes, using a Proprietary Algorithm that evaluates over 5 million combinations. Built for bulk fleets of 50 to 5,000 trucks."}},{"@type":"Question","name":"How much does Nivio Dispatch cost?","acceptedAnswer":{"@type":"Answer","text":"Nivio Dispatch starts at $2 per driver per day. A comparable 75-truck sand-hauling fleet saw roughly $599,000 a year in savings, and a 120-truck fuel fleet about $1.48 million."}},{"@type":"Question","name":"What fleets is Nivio Dispatch for?","acceptedAnswer":{"@type":"Answer","text":"Bulk trucking fleets from 50 to 5,000 trucks hauling diesel, sand, crude, water, chemicals, grain, and other bulk commodities. It is not built for last-mile delivery or general over-the-road freight."}},{"@type":"Question","name":"Does Nivio Dispatch replace my TMS?","acceptedAnswer":{"@type":"Answer","text":"No. Nivio Dispatch layers on top of your existing TMS (McLeod, TMW, or custom) and ELD (Motive, Samsara, Geotab, Omnitracs). It builds the optimized plan and pushes assignments to the systems you already run."}}]}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="brand-mk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Nivio">
+<defs>
+<linearGradient id="cmN" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="50%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+<linearGradient id="cmEW" x1="0" y1="0.5" x2="1" y2="0.5"><stop offset="0%" stop-color="#1E3A8A"/><stop offset="50%" stop-color="#2563EB"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+</defs>
+<circle cx="50" cy="50" r="40" fill="#0A1540" stroke="#1E40AF" stroke-width="1.2"/>
+<polygon points="50,10 55,44 45,44" fill="url(#cmN)"/>
+<polygon points="50,90 54,56 46,56" fill="#1E40AF" opacity="0.65"/>
+<polygon points="90,50 56,46 56,54" fill="url(#cmEW)" opacity="0.7"/>
+<polygon points="10,50 44,46 44,54" fill="url(#cmEW)" opacity="0.7"/>
+<circle cx="50" cy="50" r="9" fill="#0A1540" stroke="#3B82F6" stroke-width="1.2"/>
+<circle cx="50" cy="50" r="4.5" fill="#3B82F6"/>
+<circle cx="50" cy="50" r="2" fill="#DBEAFE"/>
+<circle cx="50" cy="10" r="2.5" fill="#DBEAFE"/>
+</svg>
+      <span class="brand-n">Nivio</span>
+      <span class="brand-s">Dispatch</span>
+    </a>
+    <div class="nav-c">
+      <a class="nav-a" href="index.html">Home</a>
+      <a class="nav-a active" href="dispatch.html">Dispatch</a>
+      <a class="nav-a" href="marketer.html">Marketer</a>
+      <a class="nav-a" href="bind.html">Bind</a>
+      <a class="nav-a" href="carrier-shield.html">Carrier Shield</a>
+      <a class="nav-a" href="vet.html">Vet</a>
+      <a class="nav-a" href="board-room.html">Board Room</a>
+    </div>
+    <div class="nav-r">
+      <span class="pill-live">Live · 2026 cohort</span>
+      <a class="btn ghost" href="#">Sign in</a>
+      <a class="btn p" href="#cta">Get started <span class="arr">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="tape">
+  <div class="tape-run">
+    <span class="ti"><span class="s">SOLVER</span><span class="v">5M+ combinations</span><span class="u">evaluated</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">PLAN</span><span class="v">full shift</span><span class="u">in minutes</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">SAND FLEET</span><span class="v">loaded mile 43.25→47.84%</span><span class="u">+10.62</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">FUEL FLEET</span><span class="v">+12.52%</span><span class="u">loaded mile</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">WATER FLEET</span><span class="v">+18%</span><span class="u">loads/shift</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">HOS</span><span class="v">enforced at plan time</span><span class="u">14h · 30min · 70h</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">PRICE</span><span class="v">$2 / driver / day</span><span class="u">entry</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">FLEETS</span><span class="v">50–5,000 trucks</span><span class="u">bulk</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">SOLVER</span><span class="v">5M+ combinations</span><span class="u">evaluated</span></span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="bdg-tag">First to market</span>
+          The world's first bulk dispatch optimization algorithm
+          <span class="arr">→</span>
+        </div>
+        <h1 class="hero-h">Plan every load<br>and every driver.<br><span class="grad">One click.</span></h1>
+        <p class="hero-sub">Every afternoon, from 3 to 7, your dispatcher hand-builds tomorrow's plan — matching every available driver to every load, around hours of service, time windows, and customer rules. <b>Nivio Dispatch does it in one click, in minutes.</b> Same drivers, same loads, a better plan. The first optimization algorithm built for bulk trucking dispatch.</p>
+        <div class="hero-btns">
+          <a class="btn p lg" href="#cta">See your number — free head-to-head <span class="arr">→</span></a>
+          <a class="btn s lg" href="#modules">How it works</a>
+        </div>
+        <div class="hero-signals">
+          <div class="sig"><span class="d"></span><span class="v">4 hrs → 1 click</span><span class="l">the afternoon plan</span></div>
+          <div class="sig"><span class="d"></span><span class="v">minutes</span><span class="l">every load, every driver</span></div>
+          <div class="sig"><span class="d"></span><span class="v">5M+</span><span class="l">combinations evaluated</span></div>
+          <div class="sig"><span class="d"></span><span class="v">First</span><span class="l">of its kind</span></div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="float-card fc1">
+          <div class="icn">↑</div>
+          <div>
+            <div class="t">Plan solved</div>
+            <div class="s">Loaded mile <b>+10.62%</b></div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="pc-bar">
+            <div class="pc-lights"><span></span><span></span><span></span></div>
+            <div class="pc-url"><span>niviolab.com/dispatch/board/<b>bd-0423-am</b></span></div>
+            <span class="pc-live">Live</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-topbar">
+              <div class="pc-tabs">
+                <span class="pc-tab">Loads</span>
+                <span class="pc-tab active">Board</span>
+                <span class="pc-tab">Lanes</span>
+                <span class="pc-tab">Settle</span>
+              </div>
+              <div class="pc-meta mono"><span>SAND-AM</span><span>·</span><span>75 trucks</span><span>·</span><b>minutes</b></div>
+            </div>
+
+            <div class="pc-hero">
+              <div class="pc-hero-l">
+                <div class="pc-plan-lbl"><span>Loaded mile</span><span>+10.62%</span></div>
+                <div class="pc-plan-val"><span class="grad">47.84%</span></div>
+                <div class="pc-plan-sub">75-truck sand fleet · up from 43.25% · HOS-legal</div>
+                <svg viewBox="0 0 300 36" preserveAspectRatio="none" style="margin-top:10px;height:36px;width:100%">
+                  <defs>
+                    <linearGradient id="sp-grad-d" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient>
+                    <linearGradient id="sp-area-d" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity=".25"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/></linearGradient>
+                  </defs>
+                  <path d="M 0 30 L 20 26 L 40 28 L 60 22 L 80 24 L 100 18 L 120 20 L 140 14 L 160 12 L 180 14 L 200 8 L 220 6 L 240 10 L 260 4 L 280 2 L 300 0 L 300 36 L 0 36 Z" fill="url(#sp-area-d)"/>
+                  <path d="M 0 30 L 20 26 L 40 28 L 60 22 L 80 24 L 100 18 L 120 20 L 140 14 L 160 12 L 180 14 L 200 8 L 220 6 L 240 10 L 260 4 L 280 2 L 300 0" fill="none" stroke="url(#sp-grad-d)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="300" cy="0" r="3" fill="#8B5CF6"/>
+                </svg>
+              </div>
+              <div class="pc-hero-r">
+                <div class="pc-pill">
+                  <div class="l">Total miles</div>
+                  <div class="v">−9.6% <span class="up">↓</span></div>
+                </div>
+                <div class="pc-pill">
+                  <div class="l">Revenue / hour</div>
+                  <div class="v">+$15.47 <span class="up">↑</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pc-list">
+              <div class="pc-list-hdr"><span>Load</span><span>Driver · Lane</span><span>HOS</span><span class="r">ETA</span><span class="r">▸</span></div>
+              <div class="pc-row take"><span class="id">L-0412</span><span class="cp"><span class="av">MR</span>M. Ruiz · <span class="lane">HOU → ELP</span></span><span class="lane">7h 20m</span><span class="eta">14:22</span><span class="tk"><i class="ok">✓</i></span></div>
+              <div class="pc-row take"><span class="id">L-0418</span><span class="cp"><span class="av">JT</span>J. Tran · <span class="lane">DAL → OKC</span></span><span class="lane">5h 10m</span><span class="eta">11:04</span><span class="tk"><i class="ok">✓</i></span></div>
+              <div class="pc-row"><span class="id">L-0422</span><span class="cp"><span class="av" style="background:linear-gradient(135deg,#F59E0B,#F97316)">KS</span>K. Singh · <span class="lane">MEM → BNA</span></span><span class="lane">2h 40m</span><span class="eta" style="color:var(--amber)">17:48</span><span class="tk"><i class="late">!</i></span></div>
+              <div class="pc-row take"><span class="id">L-0431</span><span class="cp"><span class="av">AD</span>A. Delgado · <span class="lane">PHX → LAX</span></span><span class="lane">8h 50m</span><span class="eta">19:05</span><span class="tk"><i class="ok">✓</i></span></div>
+              <div class="pc-row"><span class="id">L-0445</span><span class="cp"><span class="av" style="background:var(--ink5);color:#fff">—</span>Unassigned · <span class="lane">SLC → DEN</span></span><span class="lane">—</span><span class="eta" style="color:var(--ink4)">—</span><span class="tk"><i class="idle">?</i></span></div>
+            </div>
+
+            <div class="pc-cta">
+              <div class="txt">Board is balanced. <b>Release 38 tenders?</b></div>
+              <a class="btn p" href="#">Release <span class="arr">→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-card fc2">
+          <div class="t">75-truck sand fleet</div>
+          <div class="v"><span class="cnum" data-pre="~$" data-to="599" data-suf="K">~$599K</span> <span class="grad">↗</span></div>
+          <div class="u">↑ annual impact</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-sec{padding:64px 0 12px}
+  .demo-frame{max-width:980px;margin:28px auto 0;border:1px solid var(--rule);border-radius:18px;overflow:hidden;box-shadow:0 24px 70px rgba(10,15,31,.20);background:#0A0F1F;position:relative}
+  .demo-frame video{display:block;width:100%;height:auto;aspect-ratio:16/9}
+  .demo-cap{max-width:980px;margin:14px auto 0;text-align:center;color:var(--ink4);font-size:13px}
+</style>
+<section class="sec demo-sec" id="demo">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">See it in action</div>
+      <h2 class="sec-h">Watch the optimizer <span class="grad">build a full plan.</span></h2>
+      <p class="sec-dek">A real bulk board, solved end to end. As the Proprietary Algorithm places every load on every driver — inside hours of service — the route map untangles from tangled deadhead into a tight, margin-optimal plan, in minutes.</p>
+    </div>
+    <div class="demo-frame">
+      <video controls preload="metadata" playsinline poster="assets/video/dispatch-demo-poster.jpg">
+        <source src="assets/video/dispatch-demo-1080p.mp4" type="video/mp4">
+        Your browser doesn't support embedded video. <a href="assets/video/dispatch-demo-1080p.mp4">Download the demo</a>.
+      </video>
+    </div>
+    <p class="demo-cap">The optimizer planning a 73-driver board — same trucks, same loads, a smarter plan.</p>
+  </div>
+</section>
+
+<section class="logos">
+  <div class="container">
+    <p class="logos-lbl">Layers on top of the TMS and ELD you already run — no rip-and-replace</p>
+    <div class="logos-row">
+      <span class="logo-mark">McLeod</span>
+      <span class="logo-mark serif">TMW</span>
+      <span class="logo-mark mono">MOTIVE</span>
+      <span class="logo-mark">Samsara</span>
+      <span class="logo-mark serif">Geotab</span>
+      <span class="logo-mark mono">OMNITRACS</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .solverdemo{max-width:1040px;margin:0 auto 18px;border:1px solid var(--rule);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--bg)}
+  .sd-head{display:flex;align-items:center;justify-content:space-between;gap:12px 18px;padding:13px 20px;background:#0A0F1F;color:#fff;flex-wrap:wrap}
+  .sd-brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:14px;letter-spacing:-.01em}
+  .sd-brand .d{width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px rgba(16,185,129,.22)}
+  .sd-ctrl{display:flex;align-items:center;gap:16px}
+  .sd-comb{font-family:'Geist Mono',monospace;font-size:12.5px;color:#9AA6C0;white-space:nowrap}
+  .sd-comb b{color:#fff;font-weight:600}
+  .sd-go{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;border:none;background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));color:#fff;transition:all .18s}
+  .sd-go:hover{transform:translateY(-1px)}
+  .sd-body{display:grid;grid-template-columns:0.82fr 1.18fr}
+  .sd-left{padding:24px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:20px}
+  .sd-donut{display:flex;align-items:center;gap:16px}
+  .sd-donut svg{width:104px;height:104px;flex-shrink:0}
+  .sd-arc{transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)}
+  .optimized .sd-arc{stroke-dashoffset:137.2}
+  .sd-donut-meta .lab{font-size:12px;color:var(--ink4);text-transform:uppercase;letter-spacing:.04em;font-weight:600;margin-bottom:4px}
+  .sd-donut-meta .sub{font-size:13px;color:var(--ink3);line-height:1.45}
+  .sd-bar{margin-bottom:14px}
+  .sd-bar:last-child{margin-bottom:0}
+  .sd-bar .top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px}
+  .sd-bar .top span{color:var(--ink3)}
+  .sd-bar .top b{color:var(--ink2);font-family:'Geist Mono',monospace;font-weight:600}
+  .sd-track{height:8px;background:var(--bg3);border-radius:5px;overflow:hidden}
+  .sd-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--cobalt3),var(--cobalt));transition:width .9s cubic-bezier(.4,0,.2,1)}
+  .sd-fill.d{width:88.5%}.optimized .sd-fill.d{width:98.7%}
+  .sd-fill.l{width:56.8%}.optimized .sd-fill.l{width:100%}
+  .sd-status{font-size:12px;font-weight:600;font-family:'Geist Mono',monospace;color:var(--rose);display:inline-flex;align-items:center;gap:7px}
+  .sd-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--rose)}
+  .optimized .sd-status{color:var(--mint)}
+  .optimized .sd-status::before{background:var(--mint)}
+  .sd-map{position:relative;background:linear-gradient(135deg,#F7F8FB,#EEF1F7);min-height:300px}
+  .sd-map svg{position:absolute;inset:0;width:100%;height:100%}
+  .sd-map .mr{stroke:var(--rose);stroke-width:2;opacity:.5;transition:opacity .8s}
+  .sd-map .mg{stroke:var(--mint);stroke-width:2.5;opacity:0;transition:opacity .8s}
+  .optimized .sd-map .mr{opacity:0}
+  .optimized .sd-map .mg{opacity:.9}
+  .sd-node{fill:#fff;stroke:#B6C0D6;stroke-width:1.5}
+  .sd-node-t{font-family:'Geist Mono',monospace;font-size:7px;fill:var(--ink3);text-anchor:middle;dominant-baseline:central}
+  .sd-foot{padding:11px 20px;border-top:1px solid var(--rule);font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink4);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .sd-foot b{color:var(--cobalt)}
+  @media(max-width:760px){.sd-body{grid-template-columns:1fr}.sd-left{border-right:none;border-bottom:1px solid var(--rule)}}
+  @media(prefers-reduced-motion:reduce){.sd-arc,.sd-fill,.sd-map .mr,.sd-map .mg{transition:none}}
+</style>
+<section class="sec" id="modules">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">What it does</div>
+      <h2 class="sec-h">Every load, every driver, <span class="grad">planned in one click.</span></h2>
+      <p class="sec-dek">You don't need more trucks to move more freight — you need a smarter plan. A Proprietary Algorithm builds the margin-optimal plan your dispatcher used to hand-build every afternoon, then pushes it straight to the TMS you already run. No rip-and-replace.</p>
+    </div>
+    <div class="solverdemo" id="solverDemo">
+      <div class="sd-head">
+        <div class="sd-brand"><span class="d"></span>Nivio Optimize</div>
+        <div class="sd-ctrl">
+          <div class="sd-comb">Combinations <b id="sdComb">201.7 K</b></div>
+          <button class="sd-go" id="sdGo" type="button">Build the plan</button>
+        </div>
+      </div>
+      <div class="sd-body">
+        <div class="sd-left">
+          <div class="sd-donut">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="var(--bg3)" stroke-width="10"></circle>
+              <circle class="sd-arc" cx="50" cy="50" r="42" fill="none" stroke="var(--mint)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="226.95" transform="rotate(-90 50 50)"></circle>
+              <text id="sdPct" x="50" y="50" text-anchor="middle" dominant-baseline="central" font-family="'Geist Mono',monospace" font-size="19" font-weight="600" fill="var(--ink)">14%</text>
+            </svg>
+            <div class="sd-donut-meta">
+              <div class="lab">Loaded miles</div>
+              <div class="sub">Empty miles turned into paid freight as the plan solves.</div>
+            </div>
+          </div>
+          <div>
+            <div class="sd-bar">
+              <div class="top"><span>Drivers utilized</span><b id="sdDrv">69/78</b></div>
+              <div class="sd-track"><div class="sd-fill d"></div></div>
+            </div>
+            <div class="sd-bar">
+              <div class="top"><span>Loads assigned</span><b id="sdLd">147/259</b></div>
+              <div class="sd-track"><div class="sd-fill l"></div></div>
+            </div>
+          </div>
+          <div class="sd-status" id="sdStatus">Before — tangled deadhead</div>
+        </div>
+        <div class="sd-map">
+          <svg viewBox="0 0 420 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g>
+              <line class="mr" x1="64" y1="56" x2="300" y2="134"></line>
+              <line class="mr" x1="116" y1="38" x2="270" y2="216"></line>
+              <line class="mr" x1="178" y1="64" x2="60" y2="244"></line>
+              <line class="mr" x1="250" y1="46" x2="108" y2="210"></line>
+              <line class="mr" x1="322" y1="74" x2="188" y2="232"></line>
+              <line class="mr" x1="92" y1="138" x2="356" y2="176"></line>
+              <line class="mr" x1="158" y1="128" x2="344" y2="238"></line>
+              <line class="mr" x1="232" y1="150" x2="64" y2="56"></line>
+              <line class="mr" x1="108" y1="210" x2="322" y2="74"></line>
+              <line class="mr" x1="60" y1="244" x2="300" y2="134"></line>
+            </g>
+            <g>
+              <line class="mg" x1="64" y1="56" x2="116" y2="38"></line>
+              <line class="mg" x1="116" y1="38" x2="178" y2="64"></line>
+              <line class="mg" x1="178" y1="64" x2="250" y2="46"></line>
+              <line class="mg" x1="250" y1="46" x2="322" y2="74"></line>
+              <line class="mg" x1="92" y1="138" x2="158" y2="128"></line>
+              <line class="mg" x1="158" y1="128" x2="232" y2="150"></line>
+              <line class="mg" x1="232" y1="150" x2="300" y2="134"></line>
+              <line class="mg" x1="300" y1="134" x2="356" y2="176"></line>
+              <line class="mg" x1="108" y1="210" x2="188" y2="232"></line>
+              <line class="mg" x1="188" y1="232" x2="270" y2="216"></line>
+              <line class="mg" x1="60" y1="244" x2="92" y2="138"></line>
+              <line class="mg" x1="270" y1="216" x2="344" y2="238"></line>
+            </g>
+            <g>
+              <circle class="sd-node" cx="64" cy="56" r="8"></circle><text class="sd-node-t" x="64" y="56">P</text>
+              <circle class="sd-node" cx="116" cy="38" r="8"></circle><text class="sd-node-t" x="116" y="38">H</text>
+              <circle class="sd-node" cx="178" cy="64" r="8"></circle><text class="sd-node-t" x="178" y="64">H</text>
+              <circle class="sd-node" cx="250" cy="46" r="8"></circle><text class="sd-node-t" x="250" y="46">P</text>
+              <circle class="sd-node" cx="322" cy="74" r="8"></circle><text class="sd-node-t" x="322" y="74">H</text>
+              <circle class="sd-node" cx="92" cy="138" r="8"></circle><text class="sd-node-t" x="92" y="138">H</text>
+              <circle class="sd-node" cx="158" cy="128" r="8"></circle><text class="sd-node-t" x="158" y="128">P</text>
+              <circle class="sd-node" cx="232" cy="150" r="8"></circle><text class="sd-node-t" x="232" y="150">H</text>
+              <circle class="sd-node" cx="300" cy="134" r="8"></circle><text class="sd-node-t" x="300" y="134">P</text>
+              <circle class="sd-node" cx="356" cy="176" r="8"></circle><text class="sd-node-t" x="356" y="176">H</text>
+              <circle class="sd-node" cx="108" cy="210" r="8"></circle><text class="sd-node-t" x="108" y="210">P</text>
+              <circle class="sd-node" cx="188" cy="232" r="8"></circle><text class="sd-node-t" x="188" y="232">H</text>
+              <circle class="sd-node" cx="270" cy="216" r="8"></circle><text class="sd-node-t" x="270" y="216">P</text>
+              <circle class="sd-node" cx="60" cy="244" r="8"></circle><text class="sd-node-t" x="60" y="244">H</text>
+              <circle class="sd-node" cx="344" cy="238" r="8"></circle><text class="sd-node-t" x="344" y="238">P</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="sd-foot">
+        <span>75-truck sand fleet · Permian</span>
+        <span>~34M combinations · 7 min · <b>deterministic &amp; auditable</b></span>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>03 · HOS-native</div>
+        <div class="bx-h">Legal before you release.</div>
+        <p>14-hour windows, 30-minute breaks, 70-hour cycles — enforced at plan time, not caught after.</p>
+        <div class="bx-meta"><span>Water fleet</span><b>Zero HOS violations</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>04 · Commodity-aware</div>
+        <div class="bx-h">It knows bulk.</div>
+        <p>Cross-contamination rules, washouts, driver skills, hot loads, and dedicated lanes — built in for the way bulk actually moves. Sand, crude, diesel, water, chemicals, food grade, fertilizer, NGL, grain and more, each with its own constraints.</p>
+        <div class="bx-meta"><span>Verticals</span><b>15+ commodities</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>05 · Load-level P&amp;L</div>
+        <div class="bx-h">Margin on every load.</div>
+        <p>Revenue, fuel, wages, tolls, and wear costed per load, per driver, per shift — so you plan for margin, not just for coverage.</p>
+        <div class="bx-meta"><span>Live ELD sync</span><b>Motive · Samsara · Geotab · Omnitracs</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>06 · No single point of failure</div>
+        <div class="bx-h">The plan stops living in one head.</div>
+        <p>When your best dispatcher is out sick or on vacation, the operation doesn't wobble. The rules live in the system, the optimal plan builds itself, and a new hire is productive in days — not the six months it takes to learn the board by hand.</p>
+        <div class="bx-meta"><span>New-hire ramp</span><b>Days, not months</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="border-top:1px solid var(--rule)">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">Every constraint, handled</div>
+      <h2 class="sec-h">Everything your dispatcher juggles by hand, <span class="grad">the algorithm already accounts for.</span></h2>
+      <p class="sec-dek">The afternoon plan isn't one decision — it's hundreds of rules held in one person's head. Here's what the Proprietary Algorithm weighs on every load, so the plan that comes back is one you can actually run.</p>
+    </div>
+    <div class="tabwrap">
+      <div class="tabstrip" id="capstrip">
+        <button class="tabbtn active" data-i="0"><span class="n">01</span> Your objective</button>
+        <button class="tabbtn" data-i="1"><span class="n">02</span> Driver reality</button>
+        <button class="tabbtn" data-i="2"><span class="n">03</span> The right hands</button>
+        <button class="tabbtn" data-i="3"><span class="n">04</span> The route</button>
+        <button class="tabbtn" data-i="4"><span class="n">05</span> The clock</button>
+        <button class="tabbtn" data-i="5"><span class="n">06</span> Your stack</button>
+      </div>
+
+      <div class="cappanel active" data-i="0">
+        <div class="cap-grid">
+          <div>
+            <div class="cap-k"><span class="dot"></span>01 · Your objective</div>
+            <div class="cap-h">Plan to the dollar you choose.</div>
+            <p class="cap-txt">Tell it what "best" means — most revenue, lowest cost, most paid miles, least deadhead — and every assignment is built to that target. It packs the most loads onto each driver, keeps trucks earning instead of idling, and spreads work evenly so no one runs ragged while another sits half-empty. Every plan is scored, so you can see why this match beat the alternative.</p>
+            <div class="cap-meta"><b>You set the objective, the algorithm solves to it.</b></div>
+          </div>
+          <div>
+            <div class="cap-chiplabel">What it weighs</div>
+            <div class="cap-chips"><span class="cap-chip">Maximize revenue / profit</span><span class="cap-chip">Minimize cost</span><span class="cap-chip">Maximize paid miles</span><span class="cap-chip">Minimize deadhead</span><span class="cap-chip">Loads per driver</span><span class="cap-chip">Even utilization</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cappanel" data-i="1">
+        <div class="cap-grid">
+          <div>
+            <div class="cap-k"><span class="dot"></span>02 · Driver reality</div>
+            <div class="cap-h">It plans the drivers you actually have.</div>
+            <p class="cap-txt">Who's on today, who's already rolling, how many hours each one has left, who's due home, and who's been run hard three days running. The algorithm reads every driver's real clock and home-time before it assigns a single load — so the plan it hands back is one your drivers can actually run, not one you have to unwind by 4pm.</p>
+            <div class="cap-meta"><b>No driver gets a load they can't legally finish.</b></div>
+          </div>
+          <div>
+            <div class="cap-chiplabel">What it weighs</div>
+            <div class="cap-chips"><span class="cap-chip">Hours available today</span><span class="cap-chip">Home-time windows</span><span class="cap-chip">Days on / days off</span><span class="cap-chip">Driver location</span><span class="cap-chip">Hard-run fairness</span><span class="cap-chip">PTO &amp; sick</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cappanel" data-i="2">
+        <div class="cap-grid">
+          <div>
+            <div class="cap-k"><span class="dot"></span>03 · The right hands</div>
+            <div class="cap-h">The right driver for the load — every time.</div>
+            <p class="cap-txt">Hazmat, tanker, TWIC, the customer's approved-driver list, who's checked out on which product. A crude load doesn't go to a driver without the endorsement; a food-grade load doesn't go to a truck that just ran chemicals. The algorithm matches qualification to commodity before it ever matches truck to lane.</p>
+            <div class="cap-meta"><b>Every assignment clears the endorsement and the customer rule.</b></div>
+          </div>
+          <div>
+            <div class="cap-chiplabel">What it weighs</div>
+            <div class="cap-chips"><span class="cap-chip">Hazmat / tanker</span><span class="cap-chip">TWIC</span><span class="cap-chip">Customer-approved drivers</span><span class="cap-chip">Product certifications</span><span class="cap-chip">Washout history</span><span class="cap-chip">Equipment match</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cappanel" data-i="3">
+        <div class="cap-grid">
+          <div>
+            <div class="cap-k"><span class="dot"></span>04 · The route</div>
+            <div class="cap-h">Tight lanes, not tangled deadhead.</div>
+            <p class="cap-txt">Origins, destinations, racks, terminals, and the empty miles between them. The algorithm chains loads so a driver finishes one near the pickup of the next, turning deadhead into paid freight. Fewer empty miles, more loads per shift, the same trucks earning more.</p>
+            <div class="cap-meta"><b>Empty miles become paid miles.</b></div>
+          </div>
+          <div>
+            <div class="cap-chiplabel">What it weighs</div>
+            <div class="cap-chips"><span class="cap-chip">Deadhead minimization</span><span class="cap-chip">Lane chaining</span><span class="cap-chip">Rack &amp; terminal geography</span><span class="cap-chip">Fuel &amp; tolls</span><span class="cap-chip">Backhaul matching</span><span class="cap-chip">Miles per load</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cappanel" data-i="4">
+        <div class="cap-grid">
+          <div>
+            <div class="cap-k"><span class="dot"></span>05 · The clock</div>
+            <div class="cap-h">Every window, on time.</div>
+            <p class="cap-txt">Appointment times, rack and terminal hours, detention, load and unload times — and the 14-hour, 30-minute, and 70-hour HOS limits sitting on top of all of it. The algorithm sequences the day so loads land inside their windows and no driver runs out of clock mid-route.</p>
+            <div class="cap-meta"><b>HOS-legal and on-window, enforced at plan time.</b></div>
+          </div>
+          <div>
+            <div class="cap-chiplabel">What it weighs</div>
+            <div class="cap-chips"><span class="cap-chip">Appointment windows</span><span class="cap-chip">14h / 30min / 70h HOS</span><span class="cap-chip">Detention</span><span class="cap-chip">Rack &amp; terminal hours</span><span class="cap-chip">Load / unload time</span><span class="cap-chip">Reset timing</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cappanel" data-i="5">
+        <div class="cap-grid">
+          <div>
+            <div class="cap-k"><span class="dot"></span>06 · Your stack</div>
+            <div class="cap-h">It runs on what you already run.</div>
+            <p class="cap-txt">Your loads and drivers feed in from the TMS and ELD you already have — McLeod, TMW, or custom; Motive, Samsara, Geotab, Omnitracs. The plan builds, your dispatcher reviews and stays in control of every call, and the finished assignments push straight back to your TMS by webhook. No rip-and-replace, no new system to learn.</p>
+            <div class="cap-meta"><b>Layers on top of your TMS and ELD — nothing to rip out.</b></div>
+          </div>
+          <div>
+            <div class="cap-chiplabel">What it weighs</div>
+            <div class="cap-chips"><span class="cap-chip">McLeod · TMW · custom</span><span class="cap-chip">Motive · Samsara</span><span class="cap-chip">Geotab · Omnitracs</span><span class="cap-chip">Webhook push</span><span class="cap-chip">Live load feed</span><span class="cap-chip">No rip-and-replace</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-wrap" id="cta">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-inner">
+        <div>
+          <div class="cta-badge"><span>◆</span> 2026 cohort · first 25 fleets</div>
+          <h2 class="cta-h">Run your real loads <span class="grad">against the solver.</span></h2>
+          <p>Bring your TMS, ELD, and last 90 days of loads. We'll run your real shifts through Nivio and <b>show you the loaded-mile and margin you're leaving on the road</b> — with receipts. Layers on top of your TMS. No rip-and-replace. $2 per driver, per day.</p>
+          <div class="cta-btns">
+            <a class="btn p lg" href="mailto:admin@nivio-optimize.com?subject=Nivio Dispatch — Walkthrough">Request walkthrough <span class="arr">→</span></a>
+            <a class="btn s lg" href="mailto:admin@nivio-optimize.com?subject=Nivio Dispatch — Talk to the founder">Talk to the founder — he ran the board for a decade</a>
+          </div>
+        </div>
+        <div class="cta-side">
+          <div class="cta-side-hdr"><span>How it works</span><b>4 steps</b></div>
+          <div class="cta-step"><div class="n">01</div><div><div class="t">Connect</div><div class="d">TMS + ELD + last 90 days of loads</div></div></div>
+          <div class="cta-step"><div class="n">02</div><div><div class="t">Solve</div><div class="d">Your real shifts run through the solver</div></div></div>
+          <div class="cta-step"><div class="n">03</div><div><div class="t">Measure</div><div class="d">Loaded-mile + margin deltas, with receipts</div></div></div>
+          <div class="cta-step"><div class="n">04</div><div><div class="t">Go live</div><div class="d">Layers on your TMS. No rip-and-replace.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><div class="brand-mk">A</div><span class="brand-n">Nivio</span></div>
+        <p class="foot-blurb">Modernizing the work that moves the world — operator-built software for trucking, bulk commodities, and the insurance around them.</p>
+      </div>
+      <div><h5>Products</h5><ul><li><a href="dispatch.html">Dispatch</a></li><li><a href="marketer.html">Marketer</a></li><li><a href="bind.html">Bind</a></li><li><a href="carrier-shield.html">Carrier Shield</a></li><li><a href="vet.html">Vet</a></li><li><a href="board-room.html">Board Room</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="index.html">Home</a></li><li><a href="mailto:admin@nivio-optimize.com?subject=Nivio%20%E2%80%94%20Hello">Contact</a></li></ul></div>
+      <div><h5>Get started</h5><ul><li><a href="mailto:admin@nivio-optimize.com?subject=Nivio%20%E2%80%94%20Early%20access">Early access · 2026 cohort</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Nivio. Built by operators, for the people who move the world.</span>
+      <span class="mono">admin@nivio-optimize.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- Capability tabs ----
+  var strip = document.getElementById('capstrip');
+  if(strip){
+    var btns = Array.prototype.slice.call(strip.querySelectorAll('.tabbtn'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.cappanel'));
+    strip.addEventListener('click', function(e){
+      var btn = e.target.closest ? e.target.closest('.tabbtn') : null;
+      if(!btn) return;
+      var i = btn.getAttribute('data-i');
+      btns.forEach(function(b){ b.classList.toggle('active', b === btn); });
+      panels.forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-i') === i); });
+    });
+  }
+
+  // ---- Solver demo (Build the plan) ----
+  var demo = document.getElementById('solverDemo');
+  var go = document.getElementById('sdGo');
+  if(demo && go){
+    var pct = document.getElementById('sdPct');
+    var drv = document.getElementById('sdDrv');
+    var ld  = document.getElementById('sdLd');
+    var comb = document.getElementById('sdComb');
+    var status = document.getElementById('sdStatus');
+    var before = { pct:14, drv:'69/78', ld:'147/259', comb:'201.7 K', status:'Before — tangled deadhead', label:'Build the plan' };
+    var after  = { pct:48, drv:'77/78', ld:'259/259', comb:'34.1 M',  status:'After — margin-optimal plan', label:'Reset' };
+    var solved = false;
+    function animatePct(from, to){
+      if(!pct){ return; }
+      var start = null, dur = 900;
+      function step(ts){
+        if(start === null){ start = ts; }
+        var t = Math.min((ts - start) / dur, 1);
+        var e = 1 - Math.pow(1 - t, 3);
+        pct.textContent = Math.round(from + (to - from) * e) + '%';
+        if(t < 1){ requestAnimationFrame(step); }
+      }
+      requestAnimationFrame(step);
+    }
+    go.addEventListener('click', function(){
+      solved = !solved;
+      var s = solved ? after : before;
+      demo.classList.toggle('optimized', solved);
+      if(drv){ drv.textContent = s.drv; }
+      if(ld){ ld.textContent = s.ld; }
+      if(comb){ comb.textContent = s.comb; }
+      if(status){ status.textContent = s.status; }
+      go.textContent = s.label;
+      animatePct(solved ? before.pct : after.pct, s.pct);
+    });
+  }
+})();
+</script>
+</body>
+</html>

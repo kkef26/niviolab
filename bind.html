@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nivio Bind — Trucking Insurance Underwriting Software</title>
+<meta name="description" content="Prospect, onboard, bind, and monitor trucking carriers on one platform — A–F verdicts in under 200ms, nuclear-verdict flags, chameleon detection, and continuous portfolio monitoring of crashes, mileage by state, violations, and live ELD. For underwriters, MGAs, and captive managers.">
+<link rel="canonical" href="https://niviolab.com/bind">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nivio">
+<meta property="og:title" content="Nivio Bind — Trucking Insurance Underwriting Software">
+<meta property="og:description" content="Prospect, onboard, bind, and monitor trucking carriers on one platform — A–F verdicts in under 200ms, nuclear-verdict flags, chameleon detection, and continuous portfolio monitoring of crashes, mileage by state, violations, and live ELD. For underwriters, MGAs, and captive managers.">
+<meta property="og:url" content="https://niviolab.com/bind">
+<meta property="og:image" content="https://niviolab.com/og/bind.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nivio Bind — Trucking Insurance Underwriting Software">
+<meta name="twitter:description" content="Prospect, onboard, bind, and monitor trucking carriers on one platform — A–F verdicts in under 200ms, nuclear-verdict flags, chameleon detection, and continuous portfolio monitoring of crashes, mileage by state, violations, and live ELD. For underwriters, MGAs, and captive managers.">
+<meta name="twitter:image" content="https://niviolab.com/og/bind.png">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Nivio Bind","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Score any carrier in under 200ms \u2014 A\u2013F risk, nuclear-verdict flags, chameleon detection, litigation history. Built for insurance brokers who place trucking coverage.","url":"https://niviolab.com/bind","publisher":{"@type":"Organization","name":"Nivio","url":"https://niviolab.com/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Nivio","item":"https://niviolab.com/"},{"@type":"ListItem","position":2,"name":"Nivio Bind","item":"https://niviolab.com/bind"}]}]</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF;--bg2:#F7F8FB;--bg3:#EEF1F7;
+  --ink:#0A0F1F;--ink2:#1F2A44;--ink3:#4A5675;--ink4:#8994B0;--ink5:#C7CEDD;
+  --cobalt:#2563EB;--cobalt2:#1D4ED8;--cobalt3:#3B82F6;--cobalt4:#60A5FA;--cobalt-soft:#EFF3FF;
+  --mint:#10B981;--amber:#F59E0B;--rose:#F43F5E;--violet:#8B5CF6;
+  --rule:#E5E9F2;--rule2:#D0D6E4;
+  --shadow-sm:0 1px 2px rgba(10,15,31,.04),0 2px 6px rgba(10,15,31,.05);
+  --shadow-md:0 2px 4px rgba(10,15,31,.05),0 10px 28px rgba(10,15,31,.08);
+  --shadow-lg:0 8px 24px rgba(10,15,31,.08),0 24px 60px rgba(37,99,235,.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Geist',system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-feature-settings:'ss01','ss02','cv11'}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-feature-settings:'zero','ss01'}
+.container{max-width:1280px;margin:0 auto;padding:0 28px}
+
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mk{width:34px;height:34px;display:block;flex-shrink:0;border-radius:6px;background:transparent;padding:0}
+.brand-n{font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--ink)}
+.brand-s{font-size:11px;color:var(--ink4);margin-left:8px;padding-left:10px;border-left:1px solid var(--rule2);font-weight:500}
+.nav-c{flex:1;display:flex;justify-content:center;gap:2px}
+.nav-a{padding:8px 12px;font-size:13.5px;font-weight:500;color:var(--ink3);border-radius:8px;transition:all .18s;letter-spacing:-.005em;white-space:nowrap}
+.nav-a:hover{color:var(--ink);background:var(--bg2)}
+.nav-a.active{color:var(--cobalt);background:var(--cobalt-soft)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.pill-live{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(16,185,129,.08);color:var(--mint);border:1px solid rgba(16,185,129,.2);border-radius:999px;font-size:11.5px;font-weight:600}
+.pill-live::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;font-size:13.5px;font-weight:600;letter-spacing:-.005em;transition:all .18s;cursor:pointer;border:1px solid transparent;font-family:inherit}
+.btn.p{background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 4px 14px -2px rgba(37,99,235,.35)}
+.btn.p:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 22px -4px rgba(37,99,235,.45)}
+.btn.s{background:var(--bg);color:var(--ink);border-color:var(--rule2);box-shadow:var(--shadow-sm)}
+.btn.s:hover{border-color:var(--cobalt);color:var(--cobalt)}
+.btn.lg{padding:13px 22px;font-size:14.5px;border-radius:12px}
+.btn.ghost{background:transparent;color:var(--ink2);padding:9px 14px}
+.btn.ghost:hover{color:var(--cobalt);background:var(--cobalt-soft)}
+.btn .arr{transition:transform .18s}
+.btn:hover .arr{transform:translateX(2px)}
+
+.tape{background:var(--bg2);border-bottom:1px solid var(--rule);padding:8px 0;overflow:hidden}
+.tape-run{display:flex;gap:28px;animation:slide 80s linear infinite;white-space:nowrap;padding-left:100%;font-size:11.5px;font-weight:500;color:var(--ink3);font-family:'Geist Mono',monospace}
+@keyframes slide{to{transform:translateX(-100%)}}
+.ti{display:inline-flex;gap:6px;align-items:center}
+.ti .s{color:var(--ink4);font-weight:600}.ti .v{color:var(--ink2);font-weight:600}.ti .u{color:var(--mint);font-weight:600}.ti .d{color:var(--rose);font-weight:600}
+.ti-sep{color:var(--ink5);opacity:.7}
+
+.hero{padding:72px 0 80px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(37,99,235,.18),rgba(139,92,246,.1) 40%,transparent 65%);top:-400px;right:-300px;filter:blur(40px);pointer-events:none;z-index:0}
+.hero-orb.o2{top:300px;left:-400px;right:auto;width:600px;height:600px;background:radial-gradient(circle at 40% 40%,rgba(16,185,129,.1),transparent 65%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(10,15,31,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(10,15,31,.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 30%,black 10%,transparent 70%);pointer-events:none;z-index:0}
+.hero-inner{display:grid;grid-template-columns:1.05fr 1.1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 6px 5px 12px;background:var(--bg);border:1px solid var(--rule2);border-radius:999px;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:28px;box-shadow:var(--shadow-sm)}
+.hero-badge .bdg-tag{padding:3px 10px;background:linear-gradient(135deg,var(--cobalt),var(--violet));color:#fff;border-radius:999px;font-size:10.5px;font-weight:700}
+.hero-badge .arr{font-size:13px;margin-left:2px;color:var(--ink3)}
+.hero-h{font-size:clamp(3rem,5.6vw,4.6rem);font-weight:700;letter-spacing:-.042em;line-height:1;margin-bottom:22px;color:var(--ink);text-wrap:balance}
+.hero-h .grad{background:linear-gradient(135deg,var(--cobalt3) 0%,var(--violet) 60%,var(--cobalt) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero-sub{font-size:18px;color:var(--ink3);max-width:540px;line-height:1.5;margin-bottom:32px;font-weight:400}
+.hero-sub b{color:var(--ink);font-weight:600}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;align-items:center}
+.hero-signals{display:flex;flex-wrap:wrap;gap:22px;padding-top:24px;border-top:1px solid var(--rule)}
+.sig{display:flex;align-items:baseline;gap:8px}
+.sig .v{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.sig .l{font-size:12px;color:var(--ink3);font-weight:500}
+.sig .d{width:4px;height:4px;background:var(--mint);border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2);margin-right:2px;align-self:center}
+
+/* PRODUCT — risk card */
+.product{position:relative}
+.product-card{background:#fff;border:1px solid var(--rule);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;position:relative;z-index:2}
+.pc-bar{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--rule);background:linear-gradient(180deg,#fff,var(--bg2));gap:10px}
+.pc-lights{display:flex;gap:5px}
+.pc-lights span{width:10px;height:10px;border-radius:50%}
+.pc-lights span:nth-child(1){background:#FF5F57}.pc-lights span:nth-child(2){background:#FEBC2E}.pc-lights span:nth-child(3){background:#28C840}
+.pc-url{flex:1;text-align:center;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink3);background:#fff;border:1px solid var(--rule);border-radius:6px;padding:4px 14px}
+.pc-url b{color:var(--cobalt)}
+.pc-live{font-size:10.5px;font-weight:600;color:var(--mint);display:inline-flex;align-items:center;gap:5px}
+.pc-live::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%}
+
+.pc-body{padding:20px;display:flex;flex-direction:column;gap:14px}
+.pc-topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pc-submission{display:flex;align-items:center;gap:10px}
+.pc-submission .tag{padding:3px 10px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:6px;font-size:11px;font-weight:600;font-family:'Geist Mono',monospace}
+.pc-submission .name{font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.pc-meta{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--ink4);display:flex;gap:10px}
+.pc-meta b{color:var(--cobalt)}
+
+.pc-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:12px}
+.pc-hero-l{background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(139,92,246,.04));border:1px solid rgba(37,99,235,.12);border-radius:12px;padding:18px}
+.pc-plan-lbl{font-size:10.5px;font-weight:600;color:var(--cobalt);letter-spacing:.02em;margin-bottom:6px;display:flex;justify-content:space-between}
+.pc-plan-lbl span:last-child{color:var(--mint)}
+.pc-plan-val{font-size:2.4rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:4px}
+.pc-plan-val .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.pc-plan-sub{font-size:11px;color:var(--ink3)}
+.pc-hero-r{display:grid;grid-template-rows:1fr 1fr;gap:8px}
+.pc-pill{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 12px}
+.pc-pill .l{font-size:10px;font-weight:600;color:var(--ink4);letter-spacing:.04em;text-transform:uppercase}
+.pc-pill .v{font-size:15px;font-weight:700;color:var(--ink);margin-top:2px;letter-spacing:-.015em}
+.pc-pill .v .up{color:var(--mint);font-size:12px;font-weight:600}
+
+/* Signal rows */
+.pc-list{background:var(--bg2);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.pc-list-hdr{display:grid;grid-template-columns:1.4fr 70px 80px 110px;gap:10px;padding:9px 14px;background:#fff;border-bottom:1px solid var(--rule);font-family:'Geist Mono',monospace;font-size:10px;color:var(--ink4);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pc-list-hdr .r{text-align:right}
+.pc-row{display:grid;grid-template-columns:1.4fr 70px 80px 110px;gap:10px;padding:10px 14px;border-bottom:1px solid var(--rule);align-items:center;font-size:12.5px;transition:background .15s}
+.pc-row:hover{background:#fff}
+.pc-row:last-child{border:none}
+.pc-row .sig-n{font-weight:500;color:var(--ink)}
+.pc-row .sig-n .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle;background:var(--cobalt)}
+.pc-row .sig-n .dot.g{background:var(--mint)}.pc-row .sig-n .dot.a{background:var(--amber)}.pc-row .sig-n .dot.r{background:var(--rose)}
+.pc-row .weight{font-family:'Geist Mono',monospace;color:var(--ink3);font-weight:500;text-align:right}
+.pc-row .delta{font-family:'Geist Mono',monospace;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.pc-row .delta.u{color:var(--mint)}.pc-row .delta.d{color:var(--rose)}
+.pc-row .gauge{position:relative;height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.pc-row .gauge span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--cobalt3),var(--violet));border-radius:4px}
+.pc-row .gauge.g span{background:linear-gradient(90deg,var(--mint),#059669)}
+.pc-row .gauge.a span{background:linear-gradient(90deg,var(--amber),#F97316)}
+.pc-row .gauge.r span{background:linear-gradient(90deg,var(--rose),#E11D48)}
+
+.pc-cta{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(139,92,246,.06));border:1px solid rgba(37,99,235,.15);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pc-cta .txt{font-size:12.5px;color:var(--ink2);font-weight:500}
+.pc-cta .txt b{color:var(--cobalt);font-weight:700}
+.pc-cta .btn{padding:6px 12px;font-size:12px;border-radius:7px}
+
+.float-card{position:absolute;background:#fff;border:1px solid var(--rule);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-md);z-index:3;font-size:12px}
+.float-card.fc1{top:-24px;left:-32px;display:flex;align-items:center;gap:10px}
+.float-card.fc1 .icn{width:36px;height:36px;background:linear-gradient(135deg,var(--mint),#059669);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+.float-card.fc1 .t{font-weight:600;font-size:13px;color:var(--ink)}
+.float-card.fc1 .s{color:var(--ink3);font-size:11.5px}
+.float-card.fc1 .s b{color:var(--mint)}
+.float-card.fc2{bottom:-20px;right:-28px;min-width:200px}
+.float-card.fc2 .t{font-size:10.5px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.float-card.fc2 .v{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.float-card.fc2 .v .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.float-card.fc2 .u{font-size:12px;color:var(--mint);font-weight:600;margin-top:6px;display:flex;align-items:center;gap:4px}
+
+.logos{padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--bg2)}
+.logos-lbl{text-align:center;font-size:12px;font-weight:500;color:var(--ink3);margin-bottom:22px}
+.logos-row{display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;opacity:.75}
+.logo-mark{font-family:'Geist',sans-serif;font-weight:700;font-size:17px;color:var(--ink3);letter-spacing:-.015em}
+.logo-mark.serif{font-family:Georgia,serif;font-style:italic;font-weight:500}
+.logo-mark.mono{font-family:'Geist Mono',monospace;font-weight:500;font-size:15px}
+
+.sec{padding:110px 0;position:relative}
+.sec.alt{background:var(--bg2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.sec-head{text-align:center;margin-bottom:60px;max-width:780px;margin-left:auto;margin-right:auto}
+.sec-kick{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:999px;font-size:12px;font-weight:600;margin-bottom:18px}
+.sec-kick::before{content:'';width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.sec-h{font-size:clamp(2.2rem,3.8vw,3.2rem);font-weight:700;letter-spacing:-.035em;line-height:1.04;text-wrap:balance;color:var(--ink);margin-bottom:14px}
+.sec-h .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-dek{font-size:17px;color:var(--ink3);line-height:1.5;max-width:620px;margin:0 auto}
+
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(180px,auto);gap:16px}
+.bx{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:all .25s}
+.bx:hover{border-color:var(--cobalt3);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.bx-k{font-size:11px;font-weight:600;color:var(--cobalt);letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;display:inline-flex;align-items:center;gap:6px}
+.bx-k .dot{width:5px;height:5px;background:var(--cobalt);border-radius:50%}
+.bx-h{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--ink);margin-bottom:8px;text-wrap:balance}
+.bx p{font-size:14px;color:var(--ink3);line-height:1.55}
+.bx-meta{margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule2);font-family:'Geist Mono',monospace;font-size:11px;color:var(--ink4);display:flex;justify-content:space-between}
+.bx-meta b{color:var(--cobalt)}
+.bx.w2{grid-column:span 3}
+.bx.w3{grid-column:span 4}
+.bx.w4{grid-column:span 2}
+.bx.tall{grid-row:span 2}
+.bx-visual{margin-top:16px;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--rule);border-radius:10px;padding:14px;position:relative;overflow:hidden}
+
+/* Risk gauge visual */
+.vis-gauge{display:flex;flex-direction:column;gap:9px}
+.vis-gauge-row{display:grid;grid-template-columns:70px 1fr 36px;gap:10px;align-items:center;font-family:'Geist Mono',monospace;font-size:10.5px}
+.vis-gauge-row .nm{color:var(--ink2);font-weight:600;font-family:'Geist',sans-serif;font-size:11.5px}
+.vis-gauge-row .bar{height:9px;background:var(--bg3);border-radius:4px;overflow:hidden;position:relative}
+.vis-gauge-row .bar span{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--mint),var(--cobalt),var(--violet));border-radius:4px}
+.vis-gauge-row .n{color:var(--ink);font-weight:700;text-align:right;font-size:11.5px}
+
+.vis-bars{display:flex;gap:3px;align-items:flex-end;height:80px}
+.vis-bars span{flex:1;background:linear-gradient(180deg,var(--cobalt3),var(--cobalt));border-radius:2px 2px 0 0;opacity:.8}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;background:#fff;border:1px solid var(--rule);border-radius:20px;padding:36px 24px;box-shadow:var(--shadow-md)}
+.steps::before{content:'';position:absolute;left:10%;right:10%;top:74px;height:2px;background:repeating-linear-gradient(90deg,var(--cobalt) 0 6px,transparent 6px 12px);opacity:.6}
+.step{text-align:center;position:relative;z-index:1;padding:0 12px}
+.step .idx{width:44px;height:44px;margin:0 auto 14px;background:#fff;border:2px solid var(--cobalt);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cobalt);font-weight:700;font-size:17px;box-shadow:0 4px 12px -2px rgba(37,99,235,.25)}
+.step .stg{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:-.015em}
+.step .when{font-family:'Geist Mono',monospace;font-size:11px;color:var(--cobalt);font-weight:600;margin-bottom:10px}
+.step .txt{font-size:13px;color:var(--ink3);line-height:1.5}
+.step .txt b{color:var(--ink);font-weight:600}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:all .2s}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cobalt3),var(--violet));opacity:0;transition:opacity .2s}
+.kpi:hover{border-color:var(--cobalt3);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi:hover::before{opacity:1}
+.kpi .k{font-size:11px;font-weight:600;color:var(--ink4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;display:flex;justify-content:space-between}
+.kpi .k .tag{color:var(--cobalt);background:var(--cobalt-soft);padding:2px 8px;border-radius:999px;text-transform:none;font-size:10.5px;letter-spacing:0}
+.kpi .v{font-size:3rem;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1}
+.kpi .v .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kpi .v .mint{color:var(--mint)}
+.kpi .v .u{font-size:1.1rem;color:var(--ink3);font-weight:600}
+.kpi .note{font-size:13px;color:var(--ink3);margin-top:14px;line-height:1.5}
+
+.q-wrap{padding:110px 0;background:linear-gradient(180deg,var(--bg),var(--bg2));border-top:1px solid var(--rule);position:relative;overflow:hidden}
+.q-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(37,99,235,.1),transparent 60%);filter:blur(20px);pointer-events:none}
+.q-card{max-width:1000px;margin:0 auto;background:#fff;border:1px solid var(--rule);border-radius:24px;padding:56px 64px;box-shadow:var(--shadow-lg);position:relative}
+.q-mark{position:absolute;top:20px;left:28px;width:48px;height:48px;background:linear-gradient(135deg,var(--cobalt-soft),rgba(139,92,246,.1));border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cobalt);font-size:30px;font-weight:900;font-family:Georgia,serif;line-height:1}
+.q-text{font-size:clamp(1.4rem,2.3vw,1.75rem);font-weight:500;letter-spacing:-.022em;line-height:1.3;color:var(--ink);margin-bottom:32px;padding-left:70px}
+.q-text .grad{background:linear-gradient(135deg,var(--cobalt3),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.q-by{padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.q-person{display:flex;align-items:center;gap:14px}
+.q-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cobalt3),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px}
+.q-who{font-size:14.5px;font-weight:600;color:var(--ink)}
+.q-who .s{display:block;font-size:13px;color:var(--ink3);font-weight:500;margin-top:2px}
+.q-badge{padding:6px 14px;background:var(--cobalt-soft);color:var(--cobalt);border-radius:999px;font-size:12px;font-weight:600}
+
+.cta-wrap{padding:140px 0;position:relative;overflow:hidden}
+.cta-wrap::before{content:'';position:absolute;top:10%;left:10%;right:10%;bottom:10%;background:radial-gradient(ellipse at center,rgba(37,99,235,.12),transparent 60%);filter:blur(20px);pointer-events:none}
+.cta-card{max-width:1100px;margin:0 auto;background:linear-gradient(135deg,#0A0F1F 0%,#1E293B 100%);color:#fff;border-radius:28px;padding:60px 64px;position:relative;overflow:hidden;box-shadow:0 40px 80px -20px rgba(10,15,31,.4)}
+.cta-card::before{content:'';position:absolute;top:-40%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(37,99,235,.45),transparent 60%);filter:blur(10px);pointer-events:none}
+.cta-card::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 50%,black,transparent 80%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.cta-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(37,99,235,.15);color:var(--cobalt4);border:1px solid rgba(96,165,250,.3);border-radius:999px;font-size:12px;font-weight:600;margin-bottom:22px}
+.cta-h{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;letter-spacing:-.035em;line-height:1;margin-bottom:18px}
+.cta-h .grad{background:linear-gradient(135deg,var(--cobalt4),var(--violet),#EC4899);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-card p{font-size:17px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:30px;max-width:520px}
+.cta-card p b{color:#fff;font-weight:600}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.cta-card .btn.p{background:linear-gradient(180deg,var(--cobalt4),var(--cobalt3));box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 8px 24px -4px rgba(37,99,235,.5)}
+.cta-card .btn.s{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.18)}
+.cta-card .btn.s:hover{background:rgba(255,255,255,.12)}
+.cta-side{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px}
+.cta-side-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.cta-side-hdr b{color:var(--cobalt4);letter-spacing:0;text-transform:none;font-size:12px}
+.cta-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.cta-step:last-child{border:none}
+.cta-step .n{width:26px;height:26px;border:1px solid rgba(96,165,250,.4);color:var(--cobalt4);border-radius:7px;font-family:'Geist Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,.1)}
+.cta-step .t{color:#fff;font-size:13.5px;font-weight:600}
+.cta-step .d{font-size:12px;color:rgba(255,255,255,.6);font-weight:400;margin-top:2px}
+
+.foot{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--rule)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid var(--rule)}
+.foot h5{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.foot ul{list-style:none}
+.foot li{font-size:13.5px;color:var(--ink3);margin-bottom:9px;font-weight:500}
+.foot li a:hover{color:var(--cobalt)}
+.foot-blurb{font-size:14px;color:var(--ink3);max-width:380px;line-height:1.55;margin-top:14px}
+.foot-bottom{padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink4)}
+
+@media(max-width:1080px){
+  .hero-inner,.bento,.steps,.kpi-grid,.cta-inner,.foot-grid{grid-template-columns:1fr}
+  .bx.w2,.bx.w3,.bx.w4{grid-column:span 1}.bx.tall{grid-row:auto}
+  .steps::before{display:none}.nav-c{display:none}
+  .q-text{padding-left:0;padding-top:40px}.q-mark{left:50%;transform:translateX(-50%)}
+  .float-card{display:none}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Nivio Bind?","acceptedAnswer":{"@type":"Answer","text":"Nivio Bind is trucking insurance submission software for brokers that returns a carrier risk verdict in under 200ms \u2014 a composite A\u2013F score, nuclear-verdict flags, chameleon detection, and litigation history \u2014 scored across 800,000 pre-scored carriers on 31 million-plus rows of data."}},{"@type":"Question","name":"Who is Nivio Bind for?","acceptedAnswer":{"@type":"Answer","text":"Insurance brokers who place trucking coverage — they prospect carriers, build the submission, and onboard, then hand a complete, defensible risk package to the underwriter who prices and decides."}},{"@type":"Question","name":"Is the Nivio Bind scoring a black box?","acceptedAnswer":{"@type":"Answer","text":"No. Every verdict is explainable and auditable \u2014 it shows the contributing signals behind each score, built for the regulatory and reinsurer conversations underwriters have to defend."}},{"@type":"Question","name":"What systems does Nivio Bind integrate with?","acceptedAnswer":{"@type":"Answer","text":"Nivio Bind plugs into the policy-admin systems underwriters already use, including AIM, Duck Creek, Guidewire, and Sapiens."}}]}</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="brand-mk" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Nivio">
+<defs>
+<linearGradient id="cmN" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="50%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+<linearGradient id="cmEW" x1="0" y1="0.5" x2="1" y2="0.5"><stop offset="0%" stop-color="#1E3A8A"/><stop offset="50%" stop-color="#2563EB"/><stop offset="100%" stop-color="#1E3A8A"/></linearGradient>
+</defs>
+<circle cx="50" cy="50" r="40" fill="#0A1540" stroke="#1E40AF" stroke-width="1.2"/>
+<polygon points="50,10 55,44 45,44" fill="url(#cmN)"/>
+<polygon points="50,90 54,56 46,56" fill="#1E40AF" opacity="0.65"/>
+<polygon points="90,50 56,46 56,54" fill="url(#cmEW)" opacity="0.7"/>
+<polygon points="10,50 44,46 44,54" fill="url(#cmEW)" opacity="0.7"/>
+<circle cx="50" cy="50" r="9" fill="#0A1540" stroke="#3B82F6" stroke-width="1.2"/>
+<circle cx="50" cy="50" r="4.5" fill="#3B82F6"/>
+<circle cx="50" cy="50" r="2" fill="#DBEAFE"/>
+<circle cx="50" cy="10" r="2.5" fill="#DBEAFE"/>
+</svg>
+      <span class="brand-n">Nivio</span>
+      <span class="brand-s">Bind</span>
+    </a>
+    <div class="nav-c">
+      <a class="nav-a" href="index.html">Home</a>
+      <a class="nav-a" href="dispatch.html">Dispatch</a>
+      <a class="nav-a" href="marketer.html">Marketer</a>
+      <a class="nav-a active" href="bind.html">Bind</a>
+      <a class="nav-a" href="carrier-shield.html">Carrier Shield</a>
+      <a class="nav-a" href="vet.html">Vet</a>
+      <a class="nav-a" href="board-room.html">Board Room</a>
+    </div>
+    <div class="nav-r">
+      <span class="pill-live">Live · 2026 cohort</span>
+      <a class="btn ghost" href="#">Sign in</a>
+      <a class="btn p" href="#cta">Get started <span class="arr">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="tape">
+  <div class="tape-run">
+    <span class="ti"><span class="s">CARRIERS PRE-SCORED</span><span class="v">800K</span><span class="u">↑</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">DATA ROWS</span><span class="v">31M+</span><span class="u">carrier · insp · claims</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">MEDIAN VERDICT</span><span class="v">187 ms</span><span class="u">per call</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">CARRIER CENSUS</span><span class="v">4M</span><span class="u">active DOT</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">NUCLEAR-VERDICT FLAGGED</span><span class="v">3,350</span><span class="d">1,362 critical</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">SCORE</span><span class="v">A–F</span><span class="u">explainable</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">INTEGRATIONS</span><span class="v">AIM · Duck Creek · Guidewire · Sapiens</span><span class="u">native</span></span><span class="ti-sep">·</span>
+    <span class="ti"><span class="s">CARRIERS PRE-SCORED</span><span class="v">800K</span><span class="u">↑</span></span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <span class="bdg-tag">Early access</span>
+          First 10 insurance partners · 2026 cohort
+          <span class="arr">→</span>
+        </div>
+        <h1 class="hero-h">Bind the carrier.<br>Then watch the book —<br><span class="grad">every mile, every ticket.</span></h1>
+        <p class="hero-sub">A submission lands and you've got thirty minutes to know a carrier you've never heard of — with the records spread across seven portals. Nivio returns the whole picture in <b>one call, under 200ms</b>: composite A–F score, nuclear-verdict flags, chameleon detection, litigation history. Bind it, and the carrier becomes a live book you monitor — <b>crashes, miles by state, violations, and ELD data, the day they move.</b></p>
+        <div class="hero-btns">
+          <a class="btn p lg" href="#cta">Backtest your worst claims <span class="arr">→</span></a>
+          <a class="btn s lg" href="#signals">See the whole platform</a>
+        </div>
+        <div class="hero-signals">
+          <div class="sig"><span class="d"></span><span class="v">187 ms</span><span class="l">median verdict</span></div>
+          <div class="sig"><span class="d"></span><span class="v">800K</span><span class="l">carriers pre-scored</span></div>
+          <div class="sig"><span class="d"></span><span class="v">31M+</span><span class="l">rows of carrier data</span></div>
+          <div class="sig"><span class="d"></span><span class="v">A–F</span><span class="l">explainable, auditable</span></div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="float-card fc1">
+          <div class="icn">!</div>
+          <div>
+            <div class="t">Nuclear-verdict flag</div>
+            <div class="s"><b>CRITICAL</b> · chameleon match</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="pc-bar">
+            <div class="pc-lights"><span></span><span></span><span></span></div>
+            <div class="pc-url"><span>niviolab.com/bind/<b>verdict</b></span></div>
+            <span class="pc-live">187ms</span>
+          </div>
+          <div class="pc-body">
+            <div class="pc-topbar">
+              <div class="pc-submission">
+                <span class="tag">DOT 3A4K9</span>
+                <span class="name">Sample carrier · 64 power · TX base</span>
+              </div>
+              <div class="pc-meta mono"><span>Verdict</span><span>·</span><b>187 ms</b></div>
+            </div>
+
+            <div class="pc-hero">
+              <div class="pc-hero-l">
+                <div class="pc-plan-lbl"><span>Composite score</span><span>REFER</span></div>
+                <div class="pc-plan-val"><span class="grad">D</span></div>
+                <div class="pc-plan-sub">Monitor tier · litigation history · 2 affiliates</div>
+                <svg viewBox="0 0 300 36" preserveAspectRatio="none" style="margin-top:10px;height:36px;width:100%">
+                  <defs>
+                    <linearGradient id="sp-grad-u" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#8B5CF6"/></linearGradient>
+                    <linearGradient id="sp-area-u" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity=".25"/><stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/></linearGradient>
+                  </defs>
+                  <path d="M 0 24 L 30 20 L 60 22 L 90 14 L 120 16 L 150 10 L 180 8 L 210 12 L 240 6 L 270 4 L 300 0 L 300 36 L 0 36 Z" fill="url(#sp-area-u)"/>
+                  <path d="M 0 24 L 30 20 L 60 22 L 90 14 L 120 16 L 150 10 L 180 8 L 210 12 L 240 6 L 270 4 L 300 0" fill="none" stroke="url(#sp-grad-u)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="300" cy="0" r="3" fill="#8B5CF6"/>
+                </svg>
+              </div>
+              <div class="pc-hero-r">
+                <div class="pc-pill">
+                  <div class="l">Nuclear verdict</div>
+                  <div class="v">CRITICAL <span class="up" style="color:var(--rose)">!</span></div>
+                </div>
+                <div class="pc-pill">
+                  <div class="l">Chameleon match</div>
+                  <div class="v">Found <span class="up" style="color:var(--amber)">!</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pc-list">
+              <div class="pc-list-hdr"><span>Signal</span><span class="r">Weight</span><span class="r">Status</span><span>Score</span></div>
+              <div class="pc-row">
+                <span class="sig-n"><span class="dot r"></span>Nuclear-verdict flag</span>
+                <span class="weight">0.26</span>
+                <span class="delta d">CRITICAL</span>
+                <span class="gauge r"><span style="width:88%"></span></span>
+              </div>
+              <div class="pc-row">
+                <span class="sig-n"><span class="dot a"></span>Chameleon — rebranded DOT</span>
+                <span class="weight">0.18</span>
+                <span class="delta d">MATCH</span>
+                <span class="gauge a"><span style="width:62%"></span></span>
+              </div>
+              <div class="pc-row">
+                <span class="sig-n"><span class="dot a"></span>Litigation — DOT + officers</span>
+                <span class="weight">0.22</span>
+                <span class="delta d">3 cases</span>
+                <span class="gauge a"><span style="width:54%"></span></span>
+              </div>
+              <div class="pc-row">
+                <span class="sig-n"><span class="dot g"></span>Insurance filings — MCS-90</span>
+                <span class="weight">0.14</span>
+                <span class="delta u">Active</span>
+                <span class="gauge g"><span style="width:30%"></span></span>
+              </div>
+              <div class="pc-row">
+                <span class="sig-n"><span class="dot a"></span>CSA BASICs — unsafe driving</span>
+                <span class="weight">0.20</span>
+                <span class="delta d">Alert</span>
+                <span class="gauge a"><span style="width:68%"></span></span>
+              </div>
+            </div>
+
+            <div class="pc-cta">
+              <div class="txt">Verdict in 187ms. <b>REFER — reason codes attached.</b></div>
+              <a class="btn p" href="#">Open <span class="arr">→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-card fc2">
+          <div class="t">Pre-scored carriers</div>
+          <div class="v">800<span class="grad">K</span></div>
+          <div class="u">on 31M+ rows of data</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="logos">
+  <div class="container">
+    <p class="logos-lbl">Built for insurance brokers who place trucking coverage — and the policy systems they already run</p>
+    <div class="logos-row">
+      <span class="logo-mark">31M+ rows of carrier data</span>
+      <span class="logo-mark serif">800K carriers pre-scored</span>
+      <span class="logo-mark mono">AIM</span>
+      <span class="logo-mark mono">DUCK CREEK</span>
+      <span class="logo-mark mono">GUIDEWIRE</span>
+      <span class="logo-mark mono">SAPIENS</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="signals">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">One platform, the whole lifecycle</div>
+      <h2 class="sec-h">More than a score. <span class="grad">The whole underwriting desk.</span></h2>
+      <p class="sec-dek">Prospect the carriers worth writing, research every submission in one pass, and bind with a verdict you can defend — then monitor the book continuously, every mile and every ticket, all the way to renewal.</p>
+    </div>
+    <div class="bento">
+      <div class="bx w3 tall">
+        <div class="bx-k"><span class="dot"></span>01 · The verdict</div>
+        <div class="bx-h">A–F, with every contributing signal shown.</div>
+        <p>Safety, financial, operational, and litigation records normalized into one composite tier — explainable and auditable, with every weight and record visible, so you can defend the number to a reinsurer. Not a black box.</p>
+        <div class="bx-visual vis-gauge">
+          <div class="vis-gauge-row"><span class="nm">A · Best in class</span><div class="bar"><span style="width:12%"></span></div><span class="n">12%</span></div>
+          <div class="vis-gauge-row"><span class="nm">B · Preferred</span><div class="bar"><span style="width:22%"></span></div><span class="n">22%</span></div>
+          <div class="vis-gauge-row"><span class="nm">C · Standard</span><div class="bar"><span style="width:31%"></span></div><span class="n">31%</span></div>
+          <div class="vis-gauge-row"><span class="nm">D · Monitor</span><div class="bar"><span style="width:18%"></span></div><span class="n">18%</span></div>
+          <div class="vis-gauge-row"><span class="nm">E · Refer</span><div class="bar"><span style="width:11%"></span></div><span class="n">11%</span></div>
+          <div class="vis-gauge-row"><span class="nm">F · Decline</span><div class="bar"><span style="width:6%"></span></div><span class="n">6%</span></div>
+        </div>
+        <div class="bx-meta"><span>Carriers pre-scored</span><b>800K</b></div>
+      </div>
+
+      <div class="bx w4">
+        <div class="bx-k"><span class="dot"></span>02 · Submission intake</div>
+        <div class="bx-h">Every submission, researched before you open it.</div>
+        <p>The carrier picture you'd open seven portals to assemble — pulled, scored, and classified FAST-TRACK, REFER, or DECLINE, with a drafted underwriter memo already in your inbox.</p>
+        <div class="bx-meta"><span>Time to verdict</span><b>&lt;60s</b></div>
+      </div>
+
+      <div class="bx w4">
+        <div class="bx-k"><span class="dot"></span>03 · Nuclear-verdict flags</div>
+        <div class="bx-h">The carrier you can't afford to bind, flagged first.</div>
+        <p>A Proprietary Algorithm surfaces the carriers carrying nuclear-verdict exposure before they reach your book — CRITICAL, HIGH, and CAUTION tiers, with the litigation and safety records behind each flag.</p>
+        <div class="bx-meta"><span>Flagged · critical</span><b>3,350 · 1,362</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>04 · Chameleon detection</div>
+        <div class="bx-h">Catch the carrier hiding behind a new DOT.</div>
+        <p>Operators that rebrand to shed a record, matched back to who they really are across a 4M-entity census.</p>
+        <div class="bx-meta"><span>Census matched</span><b>4M DOT</b></div>
+      </div>
+
+      <div class="bx w2">
+        <div class="bx-k"><span class="dot"></span>05 · Litigation & filings</div>
+        <div class="bx-h">Court history, officers, affiliates — and live coverage.</div>
+        <p>Cases, settlements, and judgments tied to the DOT, its officers, and affiliated entities — plus MCS-90, BMC-91, cargo certificates and continuity flags.</p>
+        <div class="bx-meta"><span>Rows of data</span><b>31M+</b></div>
+      </div>
+
+      <div class="bx w3">
+        <div class="bx-k"><span class="dot"></span>06 · Portfolio management</div>
+        <div class="bx-h">Bind it, and the book watches itself.</div>
+        <p>Every bound carrier becomes a live portfolio entry. Track crashes, miles by state, inspections and violations, CSA movement, and live ELD telematics — and get the alert the day a score degrades, not the surprise at renewal. A daily scan surfaces the carriers drifting toward a claim.</p>
+        <div class="bx-meta"><span>Monitoring</span><b>Continuous</b></div>
+      </div>
+
+      <div class="bx w4">
+        <div class="bx-k"><span class="dot"></span>07 · Prospect &amp; captives</div>
+        <div class="bx-h">Find the carriers worth writing — and know the group behind the member.</div>
+        <p>Surface targets by risk and growth signal before a submission lands, and fingerprint group and single-parent captive membership before you admit or renew.</p>
+        <div class="bx-meta"><span>Integrates</span><b>AIM · Guidewire</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">The full lifecycle</div>
+      <h2 class="sec-h">Prospect, onboard, and manage — <span class="grad">on one platform.</span></h2>
+      <p class="sec-dek">From the carriers you should be targeting to the book you've already bound. Every verdict explainable, every decision with a receipt.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="idx">01</div><div class="stg">Prospect</div><div class="when">Pre-bind</div><div class="txt">Surface the carriers worth targeting by <b>risk and growth signal</b>.</div></div>
+      <div class="step"><div class="idx">02</div><div class="stg">Onboard</div><div class="when">&lt;60s</div><div class="txt">The full carrier picture and a <b>drafted memo</b> — research done before you open it.</div></div>
+      <div class="step"><div class="idx">03</div><div class="stg">Bind</div><div class="when">187 ms</div><div class="txt">Composite score, nuclear flags, chameleon, litigation — <b>explainable</b>.</div></div>
+      <div class="step"><div class="idx">04</div><div class="stg">Bind</div><div class="when">Decision</div><div class="txt">ACCEPT / REFER / DECLINE with <b>reason codes and audit logs</b>.</div></div>
+      <div class="step"><div class="idx">05</div><div class="stg">Manage</div><div class="when">Ongoing</div><div class="txt">Crashes, miles by state, tickets, ELD — <b>monitored continuously</b>.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kick">The data behind the verdict</div>
+      <h2 class="sec-h">Built on the records <span class="grad">the verdict has to defend.</span></h2>
+      <p class="sec-dek">We are pre-revenue and onboarding our first cohort — so here is what's real: the data, the speed, and the flags that are already in the platform.</p>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="k"><span>Median verdict</span><span class="tag">per call</span></div>
+        <div class="v"><span class="mint">187<span class="u">ms</span></span></div>
+        <p class="note">Sub-200ms. Inline with your quote flow, not a four-day wait behind seven portals.</p>
+      </div>
+      <div class="kpi">
+        <div class="k"><span>Carriers pre-scored</span><span class="tag">A–F</span></div>
+        <div class="v"><span class="grad">800<span class="u">K</span></span></div>
+        <p class="note">On 31M+ rows of carrier, inspection, and claims data across a 4M-entity census.</p>
+      </div>
+      <div class="kpi">
+        <div class="k"><span>Nuclear-verdict flagged</span><span class="tag">1,362 critical</span></div>
+        <div class="v"><span class="mint">3,350</span></div>
+        <p class="note">Carriers already flagged for nuclear-verdict exposure — before they reach your book.</p>
+      </div>
+      <div class="kpi">
+        <div class="k"><span>First partners</span><span class="tag">2026 cohort</span></div>
+        <div class="v"><span class="grad">10</span></div>
+        <p class="note">We stand up a sandbox on your submissions and backtest against your worst claims.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="q-wrap">
+  <div class="container">
+    <div class="q-card">
+      <div class="q-mark">"</div>
+      <p class="q-text">A verdict you can't explain is a verdict you can't defend. <span class="grad">Every Nivio score shows its work</span> — the contributing signals, the weights, and the underlying records — so the people binding the risk, and the reinsurers behind them, can audit exactly how the number was reached.</p>
+      <div class="q-by">
+        <div class="q-person">
+          <div class="q-avatar">A</div>
+          <div class="q-who">Explainable by design<span class="s">Proprietary Algorithm · deterministic · auditable</span></div>
+        </div>
+        <span class="q-badge">Reinsurer-grade</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 0;border-top:1px solid var(--rule)"><div class="container" style="max-width:840px"><div style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px">FAQ</div><h2 style="font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.025em;margin-bottom:30px;color:var(--ink)">Common questions</h2><div style="display:flex;flex-direction:column;gap:20px"><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">What is Nivio Bind?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">Nivio Bind is trucking insurance submission software for brokers that returns a carrier risk verdict in under 200ms — a composite A–F score, nuclear-verdict flags, chameleon detection, and litigation history — scored across 800,000 pre-scored carriers on 31 million-plus rows of data.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">Who is Nivio Bind for?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">Insurance brokers who place trucking coverage — they prospect carriers, build the submission, and onboard, then hand a complete, defensible risk package to the underwriter who prices and decides.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">Is the Nivio Bind scoring a black box?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">No. Every verdict is explainable and auditable — it shows the contributing signals behind each score, built for the regulatory and reinsurer conversations underwriters have to defend.</p></div><div style="border-top:1px solid var(--rule);padding-top:18px"><h3 style="font-size:1.05rem;font-weight:600;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em">What systems does Nivio Bind integrate with?</h3><p style="font-size:.95rem;color:var(--ink3);line-height:1.65;margin:0">Nivio Bind plugs into the policy-admin systems underwriters already use, including AIM, Duck Creek, Guidewire, and Sapiens.</p></div></div></div></section>
+<section style="padding:64px 0;border-top:1px solid var(--rule)"><div class="container"><div style="display:flex;gap:22px;align-items:flex-start;max-width:880px;margin:0 auto;padding:34px;background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(139,92,246,.04));border:1px solid rgba(37,99,235,.12);border-radius:18px"><div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--cobalt3),var(--violet));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.25rem;flex-shrink:0">A</div><div><p style="font-size:1.05rem;line-height:1.7;color:var(--ink2);font-style:italic;margin:0 0 12px">"For ten years my underwriters knew less about my fleet than I did — and priced it anyway. Nivio Bind puts the real carrier picture in front of the people binding the risk. So we built it."</p><div style="font-size:.85rem;color:var(--ink3)"><b style="color:var(--ink)">Founder, Nivio</b> — Former bulk fleet operator, 2012–2022.</div></div></div></div></section>
+
+<section class="cta-wrap" id="cta">
+  <div class="container">
+    <div class="cta-card">
+      <div class="cta-inner">
+        <div>
+          <div class="cta-badge"><span>◆</span> Early access · first 10 insurance partners</div>
+          <h2 class="cta-h">Backtest us against <span class="grad">your worst claims.</span></h2>
+          <p>Send us last quarter's submissions. We'll stand up a sandbox on your book, replay Nivio against the carriers that hurt you, and <b>show you which nuclear-verdict carriers we'd have flagged before bind.</b></p>
+          <div class="cta-btns">
+            <a class="btn p lg" href="mailto:admin@nivio-optimize.com?subject=Nivio Bind — Demo">Start a sandbox <span class="arr">→</span></a>
+            <a class="btn s lg" href="mailto:admin@nivio-optimize.com?subject=Nivio Bind — Question">Talk to the founder</a>
+          </div>
+        </div>
+        <div class="cta-side">
+          <div class="cta-side-hdr"><span>How the backtest works</span><b>2026 cohort</b></div>
+          <div class="cta-step"><div class="n">01</div><div><div class="t">Send</div><div class="d">Last quarter's submissions, or your worst claims</div></div></div>
+          <div class="cta-step"><div class="n">02</div><div><div class="t">Replay</div><div class="d">We score every carrier — verdict, flags, litigation</div></div></div>
+          <div class="cta-step"><div class="n">03</div><div><div class="t">Compare</div><div class="d">What we'd have flagged, with receipts on every signal</div></div></div>
+          <div class="cta-step"><div class="n">04</div><div><div class="t">Decide</div><div class="d">Plug the verdict into your binding flow — every decline defensible</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><div class="brand-mk">A</div><span class="brand-n">Nivio</span></div>
+        <p class="foot-blurb">Modernizing the work that moves the world — operator-built software for trucking, bulk commodities, and the insurance around them.</p>
+      </div>
+      <div><h5>Products</h5><ul><li><a href="dispatch.html">Dispatch</a></li><li><a href="marketer.html">Marketer</a></li><li><a href="bind.html">Bind</a></li><li><a href="carrier-shield.html">Carrier Shield</a></li><li><a href="vet.html">Vet</a></li><li><a href="board-room.html">Board Room</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="index.html">Home</a></li><li><a href="mailto:admin@nivio-optimize.com?subject=Nivio%20%E2%80%94%20Hello">Contact</a></li></ul></div>
+      <div><h5>Get started</h5><ul><li><a href="mailto:admin@nivio-optimize.com?subject=Nivio%20%E2%80%94%20Early%20access">Early access · 2026 cohort</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Nivio. Built by operators, for the people who move the world.</span>
+      <span class="mono">admin@nivio-optimize.com</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

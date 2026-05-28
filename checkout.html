@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nivio — Checkout</title>
+<meta name="description" content="Build your Nivio stack. Select products, configure licenses, and start your trial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f1e35;--navy-light:#162844;--navy-mid:#1a3050;
+  --blue:#2457a0;--blue-bright:#3b82f6;
+  --cream:#F8F7F4;--text:#e2e8f0;--text-muted:#94a3b8;
+  --green:#10b981;--amber:#f59e0b;--red:#ef4444;
+  --purple:#8b5cf6;--cyan:#06b6d4;
+  --radius:8px;
+}
+body{
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  background:var(--navy);color:var(--text);min-height:100vh;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);border-bottom:1px solid rgba(255,255,255,0.06);
+  padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:18px;font-weight:600;color:var(--cream);text-decoration:none}
+.nav-brand span{color:var(--blue-bright)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500}
+.nav-links a:hover{color:var(--cream)}
+.cart-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;background:var(--blue-bright);color:#fff;
+  border-radius:20px;font-size:13px;font-weight:600;
+}
+
+/* LAYOUT */
+.page{max-width:1200px;margin:0 auto;padding:40px 32px 80px}
+.page-header{text-align:center;margin-bottom:48px}
+.page-header h1{font-size:32px;font-weight:700;color:var(--cream);margin-bottom:8px}
+.page-header p{font-size:16px;color:var(--text-muted);max-width:520px;margin:0 auto}
+
+.layout{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* PRODUCT GRID */
+.products-section h2{font-size:18px;font-weight:600;color:var(--cream);margin-bottom:16px}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.product-card{
+  background:var(--navy-light);border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;padding:24px;cursor:pointer;
+  transition:border-color 0.15s,background 0.15s;position:relative;
+}
+.product-card:hover{border-color:rgba(255,255,255,0.12);background:var(--navy-mid)}
+.product-card.in-cart{border-color:var(--green);background:rgba(16,185,129,0.04)}
+.product-card.in-cart::after{
+  content:'Added';position:absolute;top:12px;right:12px;
+  font-size:11px;font-weight:600;color:var(--green);
+  background:rgba(16,185,129,0.12);padding:4px 10px;border-radius:4px;
+}
+.pc-accent{width:32px;height:4px;border-radius:2px;margin-bottom:16px}
+.pc-name{font-size:16px;font-weight:600;color:var(--cream);margin-bottom:4px}
+.pc-tagline{font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.5}
+.pc-pricing{display:flex;align-items:baseline;gap:4px;margin-bottom:16px}
+.pc-credits{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--cream)}
+.pc-unit{font-size:12px;color:var(--text-muted)}
+.pc-base-unit{font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+.pc-btn{
+  display:block;width:100%;padding:10px;text-align:center;
+  background:transparent;border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--radius);color:var(--text);font-family:inherit;
+  font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;
+}
+.pc-btn:hover{border-color:var(--blue-bright);color:var(--blue-bright)}
+.product-card.in-cart .pc-btn{
+  background:rgba(239,68,68,0.08);border-color:var(--red);color:var(--red);
+}
+
+/* INVOICE SIDEBAR */
+.invoice{
+  position:sticky;top:72px;
+  background:var(--navy-light);border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;overflow:hidden;
+}
+.invoice-header{
+  padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.invoice-header h2{font-size:16px;font-weight:600;color:var(--cream)}
+.invoice-body{padding:16px 24px;min-height:120px}
+.invoice-empty{
+  text-align:center;padding:32px 0;color:var(--text-muted);font-size:14px;
+}
+.invoice-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.invoice-item:last-child{border-bottom:none}
+.ii-left{flex:1}
+.ii-name{font-size:14px;font-weight:500;color:var(--cream)}
+.ii-detail{font-size:12px;color:var(--text-muted);margin-top:2px}
+.ii-qty{
+  display:flex;align-items:center;gap:8px;
+}
+.ii-qty button{
+  width:28px;height:28px;border-radius:4px;border:1px solid rgba(255,255,255,0.1);
+  background:transparent;color:var(--text);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.ii-qty button:hover{border-color:var(--blue-bright)}
+.ii-qty span{
+  font-family:'JetBrains Mono',monospace;font-size:14px;
+  min-width:24px;text-align:center;color:var(--cream);
+}
+.ii-credits{
+  font-family:'JetBrains Mono',monospace;font-size:14px;
+  color:var(--cream);min-width:60px;text-align:right;
+}
+.invoice-footer{
+  padding:16px 24px;border-top:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.02);
+}
+.invoice-total{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;
+}
+.invoice-total span:first-child{font-size:14px;font-weight:600;color:var(--cream)}
+.invoice-total span:last-child{
+  font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--cream);
+}
+.checkout-btn{
+  display:block;width:100%;padding:14px;
+  background:var(--blue-bright);color:#fff;border:none;
+  border-radius:var(--radius);font-family:inherit;
+  font-size:15px;font-weight:600;cursor:pointer;
+  transition:opacity 0.15s,transform 0.15s;
+}
+.checkout-btn:hover{opacity:0.85;transform:scale(0.98)}
+.checkout-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.trial-note{font-size:12px;color:var(--text-muted);text-align:center;margin-top:10px}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay.active{display:flex}
+.modal{
+  background:var(--navy-light);border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;width:100%;max-width:480px;padding:32px;
+}
+.modal h3{font-size:20px;font-weight:600;color:var(--cream);margin-bottom:8px}
+.modal .tagline{font-size:14px;color:var(--text-muted);margin-bottom:24px;line-height:1.6}
+.modal-features{list-style:none;margin-bottom:24px}
+.modal-features li{
+  padding:8px 0;font-size:14px;color:var(--text);
+  display:flex;align-items:center;gap:10px;
+}
+.modal-features li::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--blue-bright);flex-shrink:0;
+}
+.qty-selector{margin-bottom:24px}
+.qty-selector label{display:block;font-size:13px;color:var(--text-muted);margin-bottom:8px}
+.qty-row{display:flex;align-items:center;gap:12px}
+.qty-row button{
+  width:36px;height:36px;border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,0.1);background:transparent;
+  color:var(--cream);font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.qty-row button:hover{border-color:var(--blue-bright)}
+.qty-row .qty-value{
+  font-family:'JetBrains Mono',monospace;font-size:24px;
+  font-weight:600;color:var(--cream);min-width:48px;text-align:center;
+}
+.qty-row .qty-total{
+  font-size:14px;color:var(--text-muted);margin-left:auto;
+}
+.qty-row .qty-total strong{color:var(--cream);font-family:'JetBrains Mono',monospace}
+.modal-actions{display:flex;gap:12px}
+.modal-actions button{
+  flex:1;padding:12px;border-radius:var(--radius);font-family:inherit;
+  font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;
+}
+.modal-cancel{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--text)}
+.modal-cancel:hover{border-color:rgba(255,255,255,0.2)}
+.modal-add{background:var(--blue-bright);border:none;color:#fff}
+.modal-add:hover{opacity:0.85}
+.modal-trial{background:transparent;border:1px solid var(--green);color:var(--green)}
+.modal-trial:hover{background:rgba(16,185,129,0.08)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://niviolab.com" class="nav-brand">Nivio<span>Lab</span></a>
+  <div class="nav-links">
+    <a href="https://niviolab.com/dispatch">Dispatch</a>
+    <a href="https://niviolab.com/marketer">Marketer</a>
+    <a href="https://niviolab.com/bind">Bind</a>
+    <a href="https://niviolab.com/shield">Shield</a>
+    <a href="https://niviolab.com/vet">Vet</a>
+    <a href="https://niviolab.com/board">Board</a>
+    <span class="cart-badge" id="cartBadge">0 items</span>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <h1>Build Your Nivio Stack</h1>
+    <p>Select the products you need, configure quantities, and start your trial or subscribe.</p>
+  </div>
+
+  <div class="layout">
+    <div class="products-section">
+      <h2>Products</h2>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <div class="invoice" id="invoice">
+      <div class="invoice-header"><h2>Your Invoice</h2></div>
+      <div class="invoice-body" id="invoiceBody">
+        <div class="invoice-empty">Select products to build your stack</div>
+      </div>
+      <div class="invoice-footer">
+        <div class="invoice-total">
+          <span>Total Credits / mo</span>
+          <span id="totalCredits">0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn" disabled>Continue to Payment</button>
+        <p class="trial-note">14-day free trial on all products. No credit card required.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Detail Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <h3 id="modalName"></h3>
+    <p class="tagline" id="modalTagline"></p>
+    <ul class="modal-features" id="modalFeatures"></ul>
+    <div class="qty-selector">
+      <label id="qtyLabel">Quantity</label>
+      <div class="qty-row">
+        <button onclick="adjustModalQty(-1)">−</button>
+        <div class="qty-value" id="modalQty">1</div>
+        <button onclick="adjustModalQty(1)">+</button>
+        <div class="qty-total"><strong id="modalTotal">5</strong> credits/mo</div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-trial" onclick="addTrial()">Start Trial</button>
+      <button class="modal-add" onclick="addToInvoice()">Add to Invoice</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {
+    id:'dispatch', name:'Nivio Dispatch', accent:'#3b82f6',
+    tagline:'AI-powered route optimization that cuts fuel costs and delivery times for freight fleets.',
+    credits:5, unit:'route', unitLabel:'per optimized route',
+    features:['Multi-stop route optimization','Real-time traffic integration','Fleet capacity balancing','Fuel cost reduction analytics','Driver assignment automation']
+  },
+  {
+    id:'marketer', name:'Nivio Marketer', accent:'#10b981',
+    tagline:'Freight marketing intelligence — track spend, measure ROI, and optimize campaigns across channels.',
+    credits:8, unit:'campaign', unitLabel:'per active campaign',
+    features:['Campaign P&L tracking','Channel attribution modeling','Lead-to-load conversion funnel','Competitor ad monitoring','Budget optimization engine']
+  },
+  {
+    id:'bind', name:'Nivio Bind', accent:'#f59e0b',
+    tagline:'Automated carrier compliance binding — verify authority, insurance, and safety scores before every load.',
+    credits:3, unit:'bind check', unitLabel:'per compliance bind',
+    features:['Real-time FMCSA authority check','Insurance certificate verification','Safety score monitoring','Automated compliance alerts','Broker-carrier contract validation']
+  },
+  {
+    id:'shield', name:'Nivio Shield', accent:'#ef4444',
+    tagline:'Real-time carrier risk monitoring — catch deteriorating safety and compliance before incidents happen.',
+    credits:4, unit:'carrier monitored', unitLabel:'per monitored carrier/mo',
+    features:['Continuous safety score tracking','Insurance lapse alerts','Authority status monitoring','Risk score trending','Exposure reduction reporting']
+  },
+  {
+    id:'vet', name:'Nivio Vet', accent:'#8b5cf6',
+    tagline:'Carrier vetting and due diligence — structured evaluation workflows for broker compliance teams.',
+    credits:6, unit:'vet report', unitLabel:'per vetting report',
+    features:['Structured vetting checklist','Multi-source data aggregation','Risk scoring algorithm','Compliance document collection','Audit-ready vet reports']
+  },
+  {
+    id:'board', name:'Nivio Board', accent:'#06b6d4',
+    tagline:'AI advisory board for freight decisions — get expert perspectives on strategy, operations, and growth.',
+    credits:10, unit:'session', unitLabel:'per advisory session',
+    features:['Multi-perspective AI advisors','Strategy scenario modeling','Market trend analysis','Competitive intelligence','Decision documentation']
+  }
+];
+
+let cart = {};
+let modalProduct = null;
+let modalQty = 1;
+
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = PRODUCTS.map(p => {
+    const inCart = cart[p.id];
+    return '<div class="product-card'+(inCart?' in-cart':'')+'" onclick="openModal(\''+p.id+'\')">' +
+      '<div class="pc-accent" style="background:'+p.accent+'"></div>' +
+      '<div class="pc-name">'+p.name+'</div>' +
+      '<div class="pc-tagline">'+p.tagline+'</div>' +
+      '<div class="pc-pricing"><span class="pc-credits">'+p.credits+'</span><span class="pc-unit"> credits</span><span class="pc-base-unit"> / '+p.unit+'</span></div>' +
+      '<button class="pc-btn">'+(inCart?'Remove from Invoice':'Configure & Add')+'</button>' +
+    '</div>';
+  }).join('');
+}
+
+function renderInvoice(){
+  const body = document.getElementById('invoiceBody');
+  const items = Object.values(cart);
+  if(items.length === 0){
+    body.innerHTML = '<div class="invoice-empty">Select products to build your stack</div>';
+    document.getElementById('totalCredits').textContent = '0';
+    document.getElementById('checkoutBtn').disabled = true;
+    document.getElementById('cartBadge').textContent = '0 items';
+    return;
+  }
+  let total = 0;
+  body.innerHTML = items.map(item => {
+    const subtotal = item.credits * item.qty;
+    total += subtotal;
+    return '<div class="invoice-item">' +
+      '<div class="ii-left"><div class="ii-name">'+item.name+(item.trial?' (Trial)':'')+'</div>' +
+      '<div class="ii-detail">'+item.qty+' '+item.unit+(item.qty>1?'s':'')+' × '+item.credits+' credits</div></div>' +
+      '<div class="ii-qty"><button onclick="adjustQty(\''+item.id+'\',-1)">−</button>' +
+      '<span>'+item.qty+'</span><button onclick="adjustQty(\''+item.id+'\',1)">+</button></div>' +
+      '<div class="ii-credits">'+subtotal+'</div></div>';
+  }).join('');
+  document.getElementById('totalCredits').textContent = total;
+  document.getElementById('checkoutBtn').disabled = false;
+  document.getElementById('cartBadge').textContent = items.length + ' item' + (items.length>1?'s':'');
+}
+
+function openModal(id){
+  if(cart[id]){
+    delete cart[id];
+    renderProducts();
+    renderInvoice();
+    return;
+  }
+  const p = PRODUCTS.find(x=>x.id===id);
+  modalProduct = p;
+  modalQty = 1;
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalTagline').textContent = p.tagline;
+  document.getElementById('modalFeatures').innerHTML = p.features.map(f=>'<li>'+f+'</li>').join('');
+  document.getElementById('qtyLabel').textContent = 'How many '+p.unit+'s?';
+  document.getElementById('modalQty').textContent = modalQty;
+  document.getElementById('modalTotal').textContent = p.credits * modalQty;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('active');
+  modalProduct = null;
+}
+
+function adjustModalQty(delta){
+  modalQty = Math.max(1, modalQty + delta);
+  document.getElementById('modalQty').textContent = modalQty;
+  document.getElementById('modalTotal').textContent = modalProduct.credits * modalQty;
+}
+
+function addToInvoice(){
+  cart[modalProduct.id] = {
+    id:modalProduct.id, name:modalProduct.name, credits:modalProduct.credits,
+    unit:modalProduct.unit, qty:modalQty, trial:false,
+    stripe_price_id: 'price_'+modalProduct.id+'_credit',
+    stripe_product_id: 'prod_nivio_'+modalProduct.id
+  };
+  closeModal();
+  renderProducts();
+  renderInvoice();
+}
+
+function addTrial(){
+  cart[modalProduct.id] = {
+    id:modalProduct.id, name:modalProduct.name, credits:modalProduct.credits,
+    unit:modalProduct.unit, qty:modalQty, trial:true,
+    stripe_price_id: 'price_'+modalProduct.id+'_trial',
+    stripe_product_id: 'prod_nivio_'+modalProduct.id
+  };
+  closeModal();
+  renderProducts();
+  renderInvoice();
+}
+
+function adjustQty(id, delta){
+  if(!cart[id]) return;
+  cart[id].qty = Math.max(1, cart[id].qty + delta);
+  renderInvoice();
+}
+
+document.getElementById('checkoutBtn').addEventListener('click', function(){
+  const lineItems = Object.values(cart).map(item => ({
+    price: item.stripe_price_id,
+    product: item.stripe_product_id,
+    quantity: item.qty,
+    credits: item.credits * item.qty,
+    trial: item.trial,
+    metadata: { unit: item.unit, credits_per_unit: item.credits }
+  }));
+  console.log('Stripe-ready payload:', JSON.stringify({
+    line_items: lineItems,
+    total_credits: lineItems.reduce((s,i)=>s+i.credits,0),
+    mode: lineItems.some(i=>i.trial) ? 'subscription_with_trial' : 'subscription',
+    trial_period_days: lineItems.some(i=>i.trial) ? 14 : 0
+  }, null, 2));
+  alert('Checkout payload logged to console. Stripe integration pending.');
+});
+
+document.getElementById('modalOverlay').addEventListener('click', function(e){
+  if(e.target === this) closeModal();
+});
+
+renderProducts();
+renderInvoice();
+</script>
+</body>
+</html>

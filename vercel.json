@@ -1,0 +1,46 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "dispatch.niviolab.com" }],
+      "destination": "/app/dispatch/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "marketer.niviolab.com" }],
+      "destination": "/app/marketer/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "bind.niviolab.com" }],
+      "destination": "/app/bind/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "shield.niviolab.com" }],
+      "destination": "/app/shield/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "vet.niviolab.com" }],
+      "destination": "/app/vet/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "board.niviolab.com" }],
+      "destination": "/app/board/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

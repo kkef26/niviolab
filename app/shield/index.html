@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nivio Shield — Sign In</title>
+<meta name="description" content="Sign in to Nivio Shield. Real-time carrier risk monitoring">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0f1e35;--navy-light:#162844;--blue:#2457a0;--blue-bright:#3b82f6;
+    --cream:#F8F7F4;--text:#e2e8f0;--text-muted:#94a3b8;
+    --accent:#ef4444;--radius:8px;
+  }
+  body{
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    background:var(--navy);color:var(--text);
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .portal{
+    width:100%;max-width:420px;
+  }
+  .portal-header{
+    text-align:center;margin-bottom:40px;
+  }
+  .brand{
+    font-size:14px;font-weight:500;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;
+  }
+  .product-name{
+    font-size:28px;font-weight:600;color:var(--cream);margin-bottom:8px;
+  }
+  .product-name span{color:var(--accent)}
+  .tagline{font-size:14px;color:var(--text-muted)}
+  .card{
+    background:var(--navy-light);border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:32px;
+  }
+  .field{margin-bottom:20px}
+  .field label{
+    display:block;font-size:13px;font-weight:500;
+    color:var(--text-muted);margin-bottom:6px;
+  }
+  .field input{
+    width:100%;padding:12px 14px;background:var(--navy);
+    border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);
+    color:var(--cream);font-family:inherit;font-size:15px;
+    transition:border-color 0.15s;
+  }
+  .field input:focus{
+    outline:none;border-color:var(--accent);
+  }
+  .field input::placeholder{color:var(--text-muted)}
+  .actions{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+  .remember{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted)}
+  .remember input[type=checkbox]{
+    width:16px;height:16px;accent-color:var(--accent);
+  }
+  .forgot{font-size:13px;color:var(--accent);text-decoration:none}
+  .forgot:hover{text-decoration:underline}
+  .btn{
+    display:block;width:100%;padding:14px;
+    background:var(--accent);color:#fff;border:none;
+    border-radius:var(--radius);font-family:inherit;
+    font-size:15px;font-weight:600;cursor:pointer;
+    transition:opacity 0.15s,transform 0.15s;
+  }
+  .btn:hover{opacity:0.85;transform:scale(0.98)}
+  .btn:active{transform:scale(0.96)}
+  .divider{
+    display:flex;align-items:center;gap:12px;
+    margin:24px 0;color:var(--text-muted);font-size:13px;
+  }
+  .divider::before,.divider::after{
+    content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);
+  }
+  .sso-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;padding:12px;background:transparent;
+    border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);
+    color:var(--text);font-family:inherit;font-size:14px;font-weight:500;
+    cursor:pointer;transition:border-color 0.15s,background 0.15s;
+  }
+  .sso-btn:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.03)}
+  .sso-btn svg{width:18px;height:18px}
+  .footer{
+    text-align:center;margin-top:24px;font-size:13px;color:var(--text-muted);
+  }
+  .footer a{color:var(--accent);text-decoration:none}
+  .footer a:hover{text-decoration:underline}
+  .status-bar{
+    position:fixed;bottom:0;left:0;right:0;
+    padding:8px;text-align:center;
+    font-size:12px;font-family:'JetBrains Mono',monospace;
+    color:var(--text-muted);background:rgba(15,30,53,0.95);
+    border-top:1px solid rgba(255,255,255,0.04);
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="portal">
+  <div class="portal-header">
+    <div class="brand">Nivio</div>
+    <h1 class="product-name">Nivio <span>Shield</span></h1>
+    <p class="tagline">Real-time carrier risk monitoring</p>
+  </div>
+  <div class="card">
+    <form id="loginForm" onsubmit="return false">
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="you@company.com" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" required>
+      </div>
+      <div class="actions">
+        <label class="remember"><input type="checkbox"> Remember me</label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+    <div class="divider">or</div>
+    <button class="sso-btn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Continue with SSO
+    </button>
+  </div>
+  <div class="footer">
+    <p>Don't have an account? <a href="https://niviolab.com/shield">Start a free trial</a></p>
+    <p style="margin-top:8px"><a href="https://niviolab.com">Back to niviolab.com</a></p>
+  </div>
+</div>
+<div class="status-bar">shield.niviolab.com — Nivio Shield v1.0</div>
+</body>
+</html>
